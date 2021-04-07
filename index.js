@@ -1,17 +1,20 @@
 // # FUNCTIONAL PROGRAMMING
 
-const createPersonWithAge = (age, person) => {
-  return { ...person, age };
-};
+/*
+=> Immutability. 
+Immutable berarti sebuah objek tidak boleh diubah setelah objek tersebut dibuat.
+Kontras dengan mutable yang artinya objek boleh diubah setelah objek tersebut dibuat.
+*/
 
-const person = {
-  name: 'Bobo'
-};
+const user = {
+  firstname: 'Harry',
+  lastName: 'Protter', // ups, typo!
+}
 
-const newPerson = createPersonWithAge(18, person);
+const createUserWithNewLastName = (newLastName, user) => {
+  return { ...user, lastName: newLastName }
+}
 
-console.log({
-  person,
-  newPerson
-});
+const newUser = createUserWithNewLastName('Potter', user);
 
+console.log(newUser);
