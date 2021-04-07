@@ -2,10 +2,10 @@
 
 /* Throwing Errors.
 throw.
-Operator ini akan “melemparkan” eror pada program, sehingga eksekusi kode akan masuk pada blok catch.
+Sekarang anggaplah json sudah sesuai, tetapi ternyata ada eror lain yang terjadi, misalnya karena variabel yang belum terdefinisi.
 */
 
-let json = '{ "age": 20 }';
+let json = '{ "name": "Yoda", "age": 20 }';
 
 try {
   let user = JSON.parse(json);
@@ -14,12 +14,16 @@ try {
     throw new SyntaxError("'name' is required.");
   }
 
-  console.log(user.name); // undefined
+  errorCode;
+
+  console.log(user.name); // Yoda
   console.log(user.age);  // 20
 } catch (error) {
   console.log(`JSON Error: ${error.message}`);
 }
 
 /*
-Ketika properti user.name tidak memiliki nilai, maka program akan menghasilkan SyntaxError. Di dalamnya kita bisa menentukan pesan yang dapat membantu menjelaskan apa eror yang terjadi.
+Eror berhasil ditangani, tetapi konsol tetap menampilkan pesan “JSON Error”, lantas bagaimana kita bisa menampilkan pesan eror sesuai eror yang muncul?
+
+Jawabannya adalah dengan if statement.
 */
