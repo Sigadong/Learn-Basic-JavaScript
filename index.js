@@ -15,7 +15,7 @@ const makeCoffee = (type, miligrams) => {
   }
 }
 
-makeCoffee("robusta", 80);
+makeCoffee("robusta", 90);
 
 console.log(coffeeStock);
 console.log(isCoffeeMachineReady);
