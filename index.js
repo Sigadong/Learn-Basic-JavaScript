@@ -1,14 +1,17 @@
 // # ERROR HANDLING
 
-/* try-catch-finally.
-Selain try dan catch, ada satu blok lagi yang ada dalam mekanisme error handling pada JavaScript, yaitu finally. Blok finally akan tetap dijalankan tanpa peduli apa pun hasil yang terjadi pada blok try-catch.
+/* Throwing Errors.
+Pada kode di atas, fungsi JSON.parse akan melakukan parsing atau konversi dari variabel json (String) menjadi sebuah object. Skenario seperti di atas akan banyak kita temui ketika melakukan request ke API.
 */
 
+let json = '{ "name": "Yoda", "age": 20 }';
+
 try {
-  console.log("Awal blok try");
-  console.log("Akhir blok try");
+  let user = JSON.parse(json);
+
+  console.log(user.name);
+  console.log(user.age);
 } catch (error) {
-  console.log("Baris ini diabaikan");
-} finally {
-  console.log("Akan tetap dieksekusi");
+  console.log(error.name);
+  console.log(error.message);
 }
