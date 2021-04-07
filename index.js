@@ -2,7 +2,7 @@
 
 /* Throwing Errors.
 throw.
-Sekarang anggaplah json sudah sesuai, tetapi ternyata ada eror lain yang terjadi, misalnya karena variabel yang belum terdefinisi.
+Dengan if statement.
 */
 
 let json = '{ "name": "Yoda", "age": 20 }';
@@ -19,11 +19,15 @@ try {
   console.log(user.name); // Yoda
   console.log(user.age);  // 20
 } catch (error) {
-  console.log(`JSON Error: ${error.message}`);
+  if (error instanceof SyntaxError) {
+    console.log(`JSON Error: ${error.message}`);
+  } else if (error instanceof ReferenceError) {
+    console.log(error.message);
+  } else {
+    console.log(error instanceof ReferenceError);
+  }
 }
 
 /*
-Eror berhasil ditangani, tetapi konsol tetap menampilkan pesan “JSON Error”, lantas bagaimana kita bisa menampilkan pesan eror sesuai eror yang muncul?
-
-Jawabannya adalah dengan if statement.
+Dengan operator instanceOf, kita bisa mendapatkan tipe dari eror yang terjadi. Dari sana kita bisa membuat percabangan bagaimana cara menangani erornya.
 */
