@@ -1,0 +1,19 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "Learn Basic JavaScript Proggramming",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sigadong/Learn-Basic-JavaScript.git"
+  },
+  "author": "irwantsiregar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sigadong/Learn-Basic-JavaScript/issues"
+  },
+  "homepage": "https://github.com/Sigadong/Learn-Basic-JavaScript#readme"
+}
