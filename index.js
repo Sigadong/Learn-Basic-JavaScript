@@ -1,10 +1,12 @@
 // # ERROR HANDLING
 
 /* Throwing Errors.
-Pada kode di atas, fungsi JSON.parse akan melakukan parsing atau konversi dari variabel json (String) menjadi sebuah object. Skenario seperti di atas akan banyak kita temui ketika melakukan request ke API.
+Lalu, bagaimana jika json string tidak sesuai dengan format object JavaScript?
+
+Apabila json tidak sesuai format, maka JSON.parse akan menimbulkan eror. Eror tersebut akan ditangkap oleh blok catch dan kode di dalamnya yang akan dieksekusi.
 */
 
-let json = '{ "name": "Yoda", "age": 20 }';
+let json = '{ bad json }';
 
 try {
   let user = JSON.parse(json);
