@@ -1,12 +1,21 @@
-// # FUNCTIONAL PROGRAMMING
+// # MODULE
 
-/*
-=> Reusable Function.
-Dengan menerapkan konsep-konsep yang ada di dalam paradigma FP, fungsi yang Anda buat akan bersifat reusable. Karena fungsi yang Anda buat merupakan pure function sehingga tidak akan dipengaruhi ataupun mempengaruhi keadaan di/dari luar. Hal ini tentu membuat fungsi dapat digunakan berkali-kali tanpa khawatir mendapatkan hasil di luar dari yang Anda ekspektasikan.
-*/
+// Export & Import
+// Multiple value in Node.js
 
-// - Array Map()
 
-const newArray = ['Harry', 'Ron', 'Jeff', 'Thomas'].map((name) => { return `${name}!` });
+// const coffeeStock = require('./state');
+const { coffeeStock, isCoffeeMachineReady } = require('./state');
 
-console.log(newArray);
+const makeCoffee = (type, miligrams) => {
+  if (coffeeStock[type] >= miligrams) {
+    console.log("Kopi berhasil dibuat!");
+  } else {
+    console.log("Biji kopi habis!");
+  }
+}
+
+makeCoffee("robusta", 80);
+
+console.log(coffeeStock);
+console.log(isCoffeeMachineReady);
