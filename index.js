@@ -1,21 +1,13 @@
 // # MODULE
 
-// Export & Import
-// Multiple value in Node.js
+// ES6 Module
 
+import coffeeStock from './state.js';
 
-// const coffeeStock = require('./state');
-const { coffeeStock, isCoffeeMachineReady } = require('./state');
-
-const makeCoffee = (type, miligrams) => {
-  if (coffeeStock[type] >= miligrams) {
-    console.log("Kopi berhasil dibuat!");
-  } else {
-    console.log("Biji kopi habis!");
+const displayStock = stock => {
+  for (const type in stock) {
+    console.log(type);
   }
 }
 
-makeCoffee("robusta", 90);
-
-console.log(coffeeStock);
-console.log(isCoffeeMachineReady);
+displayStock(coffeeStock);
