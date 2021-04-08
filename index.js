@@ -1,24 +1,73 @@
 // # CONCURRENCY
 
-/* Consuming Promises.
-Salah satu cara menulis kode yang baik adalah mengikuti prinsip yang disebut separation of concerns atau pemisahan masalah. Pemisahan masalah berarti mengorganisasikan kode ke dalam bagian-bagian yang berbeda berdasarkan tugas tertentu. Hal ini akan memudahkan kita kelak mencari kode yang salah jika aplikasi tidak bekerja dengan baik.
+/* Chaining Promises.
+Kita sudah tahu buruknya penulisan callback hell. Namun, kita tidak dapat menghindari keadaan di mana proses asynchronous saling bergantung satu sama lain. Untuk menghindari callback hell, salah satu solusinya adalah Promise.
 
-Perlu diketahui bahwa method .then() akan mengembalikan nilai promise yang sama dengan ketika objek promise itu dipanggil. Melalui sifatnya ini, daripada kita menetapkan logika resolve dan reject pada satu method then(), kita dapat memisahkan kedua logika tersebut menggunakan masing-masing method then() seperti ini:
-*/
-checkStock()
-  .then(handleSuccess)
-  .then(null, handleFailure);
+Dengan promise kita dapat melakukan proses asynchronous secara berantai. Contohnya, ketika kita ingin membuat satu gelas kopi, akan ada beberapa tahapan yang dikerjakan oleh mesin pembuat kopi, seperti memastikan mesin sudah siap, memastikan stok biji kopi dan air cukup, membuat kopi, lalu menuangkannya ke dalam gelas. Tahapan tersebut harus dilakukan secara berurutan.
 
-/*
-Namun untuk menetapkan onRejected handler, kita perlu memberikan nilai null pada parameter pertama method .then(). Hal ini sedikit merepotkan bukan? Solusinya kita dapat menggunakan method lain, yakni .catch().
-
-Method .catch() mirip seperti .then(). Namun, method ini hanya menerima satu parameter function yang digunakan untuk rejected handler. Method catch() ini akan terpanggil ketika objek promise memiliki kondisi onRejected. Berikut contoh penggunaan method .catch(): 
+Untuk memastikan rangkaian promise berjalan dengan sesuai, kita perlu mengembalikan (return) promise selanjutnya. Contohnya adalah seperti ini:
 */
 
-checkStock()
-  .then(handleSuccess)
-  .catch(handleFailure);
+const state = {
+  stock: {
+    coffeeBeans: 250,
+    water: 1000,
+  },
+  isCoffeeMachineBusy: false,
+}
 
-/*
-Dengan menggunakan method catch(), kita dapat menerapkan prinsip separation of concerns sekaligus membuat kodenya menjadi lebih rapi.
- */
+const checkAvailability = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (!state.isCoffeeMachineBusy) {
+        resolve("Mesin kopi siap digunakan.");
+      } else {
+        reject("Maaf, mesin sedang sibuk.");
+      }
+    }, 1000);
+  });
+};
+
+const checkStock = () => {
+  return new Promise((resolve, reject) => {
+    state.isCoffeeMachineBusy = true;
+    setTimeout(() => {
+      if (state.stock.coffeeBeans >= 16 && state.stock.water >= 250) {
+        resolve("Stok cukup. Bisa membuat kopi.");
+      } else {
+        reject("Stok tidak cukup!");
+      }
+    }, 1500);
+  });
+};
+
+const brewCoffee = () => {
+  console.log("Membuatkan kopi Anda...")
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Kopi sudah siap!")
+    }, 2000);
+  });
+};
+
+function makeEspresso() {
+  checkAvailability()
+    .then((value) => {
+      console.log(value);
+      return checkStock();
+    })
+    .then((value) => {
+      console.log(value)
+      return brewCoffee();
+    })
+    .then(value => {
+      console.log(value);
+      state.isCoffeeMachineBusy = false;
+    })
+    .catch(rejectedReason => {
+      console.log(rejectedReason);
+      state.isCoffeeMachineBusy = false;
+    });
+}
+
+makeEspresso();
