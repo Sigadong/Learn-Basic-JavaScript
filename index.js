@@ -1,26 +1,33 @@
 // # CONCURRENCY
-/* setTimeout().
-Fungsi setTimeout() merupakan cara yang paling mudah untuk membuat kode kita dijalankan secara asynchronous. Fungsi ini menerima dua buah parameter. Parameter pertama adalah fungsi yang akan dijalankan secara asynchronous. Kedua adalah nilai number dalam milisecond sebagai nilai tunggu sebelum fungsi dijalankan. Contoh penggunaannya adalah seperti ini:
+/* Constructing Promise Object.
+Promise merupakan sebuah objek yang digunakan untuk membuat sebuah komputasi (kode) ditangguhkan dan berjalan secara asynchronous. Untuk membuat objek promise, kita gunakan keyword new diikuti dengan constructor dari Promise:
+  const coffee = new Promise();
+
+  Di dalam constructor Promise, kita perlu menetapkan resolver function atau bisa disebut executor function. Fungsi tersebut akan dijalankan secara otomatis ketika constructor Promise dipanggil.
 */
 
-console.log("Selamat datang!");
-setTimeout(() => {
-  console.log("Terima kasih sudah mampir, silakan datang kembali!");
-}, 3000);
+const executorFunction = (resolve, reject) => {
+  const isCoffeeMakerReady = true;
+  if (isCoffeeMakerReady) {
+    resolve("Kopi berhasil dibuat");
+  } else {
+    reject("Mesin kopi tidak bisa digunakan");
+  }
+}
 
-console.log("Ada yang bisa dibantu?");
+const makeCoffee = () => {
+  return new Promise(executorFunction);
+}
+
+const coffeePromise = makeCoffee();
+console.log(coffeePromise);
+
 
 /*
-Jika hanya mengenal program secara synchronous, maka kita dapat membayangkan hasilnya memiliki urutan sebagai berikut:
+Executor function memiliki dua parameter, yaitu resolve dan reject yang berupa fungsi. Berikut penjelasan detailnya:
 
-Mencetak -> Selamat datang!
-Menunggu selama tiga detik.
-Mencetak -> Terima kasih sudah mampir, silakan datang kembali!
-Mencetak -> Ada yang bisa dibantu?
-Namun, nyatanya setTimeout() tidak akan menghentikan JavaScript untuk melakukan eksekusi kode pada baris berikutnya. Sehingga urutannya menjadi seperti berikut:
+resolve() adalah parameter pertama pada executor function. Parameter ini merupakan fungsi yang dapat menerima satu parameter. Biasanya kita gunakan untuk mengirimkan data ketika promise berhasil dilakukan. Ketika fungsi ini terpanggil, kondisi Promise akan berubah dari pending menjadi fulfilled.
 
-Mencetak -> Selamat datang!
-Mencetak -> Ada yang bisa dibantu?
-Menunggu selama tiga detik
-Mencetak -> Terima kasih sudah mampir, silakan datang kembali!
+reject() adalah parameter kedua pada executor function. Parameter ini merupakan fungsi yang dapat menerima satu parameter dan digunakan untuk memberikan alasan kenapa Promise tidak dapat terpenuhi. Ketika fungsi ini terpanggil, kondisi Promise akan berubah dari pending menjadi rejected.
+Executor function akan berjalan secara asynchronous hingga akhirnya kondisi Promise berubah dari pending menjadi fulfilled/rejected.
  */
