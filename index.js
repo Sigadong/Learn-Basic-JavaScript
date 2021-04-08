@@ -1,33 +1,46 @@
 // # CONCURRENCY
-/* Constructing Promise Object.
-Promise merupakan sebuah objek yang digunakan untuk membuat sebuah komputasi (kode) ditangguhkan dan berjalan secara asynchronous. Untuk membuat objek promise, kita gunakan keyword new diikuti dengan constructor dari Promise:
-  const coffee = new Promise();
+/* Consuming Promises.
+Setelah mengetahui bagaimana membuat objek Promise, hal yang tentunya sangat penting adalah tahu bagaimana mengonsumsinya. Seperti yang telah kita bahas sebelumnya, status awal dari Promise adalah pending. Kemudian, akan ada dua kemungkinan yang terjadi, fulfilled atau rejected.
 
-  Di dalam constructor Promise, kita perlu menetapkan resolver function atau bisa disebut executor function. Fungsi tersebut akan dijalankan secara otomatis ketika constructor Promise dipanggil.
+Untuk menangani hasil dari Promise, kita gunakan method .then(). Jika kita terjemahkan, “then” berarti “kemudian”, sehingga kurang lebih kita memerintahkan JavaScript seperti ini: “Jika janji saya sudah selesai, kemudian lakukan ...”. Jika dituliskan dalam bentuk kode akan seperti berikut:
+
+    const myPromise = new Promise(executorFunction);
+    myPromise.then(onFullfilled, onRejected);
+
+.then() sendiri adalah sebuah higher-order function yang membutuhkan dua parameter. Keduanya adalah callback function yang juga dikenal sebagai handler. Handler pertama adalah fungsi yang akan dijalankan ketika Promise berstatus resolve. Sedangkan handler kedua adalah fungsi yang akan dijalankan ketika Promise berstatus reject.
 */
 
-const executorFunction = (resolve, reject) => {
-  const isCoffeeMakerReady = true;
-  if (isCoffeeMakerReady) {
-    resolve("Kopi berhasil dibuat");
+const stock = {
+  coffeeBeans: 250,
+  water: 1000,
+}
+
+const checkStock = new Promise((resolve, reject) => {
+  if (stock.coffeeBeans >= 16 && stock.water >= 250) {
+    resolve("Stok cukup. Bisa membuat kopi");
   } else {
-    reject("Mesin kopi tidak bisa digunakan");
+    reject("Stok tidak cukup");
   }
+});
+
+
+const handleSuccess = resolvedValue => {
+  console.log(resolvedValue);
 }
 
-const makeCoffee = () => {
-  return new Promise(executorFunction);
+const handleFailure = rejectionReason => {
+  console.log(rejectionReason);
 }
 
-const coffeePromise = makeCoffee();
-console.log(coffeePromise);
+const check = checkStock().then(handleSuccess, handleFailure);
+
+console.log(check);
 
 
 /*
-Executor function memiliki dua parameter, yaitu resolve dan reject yang berupa fungsi. Berikut penjelasan detailnya:
-
-resolve() adalah parameter pertama pada executor function. Parameter ini merupakan fungsi yang dapat menerima satu parameter. Biasanya kita gunakan untuk mengirimkan data ketika promise berhasil dilakukan. Ketika fungsi ini terpanggil, kondisi Promise akan berubah dari pending menjadi fulfilled.
-
-reject() adalah parameter kedua pada executor function. Parameter ini merupakan fungsi yang dapat menerima satu parameter dan digunakan untuk memberikan alasan kenapa Promise tidak dapat terpenuhi. Ketika fungsi ini terpanggil, kondisi Promise akan berubah dari pending menjadi rejected.
-Executor function akan berjalan secara asynchronous hingga akhirnya kondisi Promise berubah dari pending menjadi fulfilled/rejected.
+Mari kita bedah kode di atas:
+checkStock() merupakan fungsi yang mengembalikan promise dan akan menghasilkan resolve() dengan membawa nilai “Stok cukup. Bisa membuat kopi”.
+Lalu kita mendeklarasikan fungsi handleSuccess() dan handleFailure() yang mencetak nilai dari parameternya.
+Kemudian kita memanggil method .then() dari checkStock. Isi parameter then() dengan dua fungsi handler yang telah kita buat sebelumnya.
+Parameter pertama berisi fungsi handleSuccess untuk menangani kondisi ketika promise berstatus resolve. Parameter kedua berisi fungsi handleFailure yang menangani ketika promise berstatus reject.
  */
