@@ -1,11 +1,15 @@
 // # CONCURRENCY
 
-/* Chaining Promises.
-Kita sudah tahu buruknya penulisan callback hell. Namun, kita tidak dapat menghindari keadaan di mana proses asynchronous saling bergantung satu sama lain. Untuk menghindari callback hell, salah satu solusinya adalah Promise.
+/* Promise All.
+Pada materi sebelumnya kita belajar bagaimana promise dapat menangani situasi di mana terdapat asynchronous process yang saling membutuhkan untuk melaksanakan tugasnya. Lalu bagaimana jika kita ingin menjalankan banyak promise sekaligus tanpa memedulikan urutan? Bukankah concurrency memungkinkan kita melakukan banyak proses bersamaan agar lebih efisien?
 
-Dengan promise kita dapat melakukan proses asynchronous secara berantai. Contohnya, ketika kita ingin membuat satu gelas kopi, akan ada beberapa tahapan yang dikerjakan oleh mesin pembuat kopi, seperti memastikan mesin sudah siap, memastikan stok biji kopi dan air cukup, membuat kopi, lalu menuangkannya ke dalam gelas. Tahapan tersebut harus dilakukan secara berurutan.
+Ketika pergi ke sebuah kedai kopi bersama rekan kerja, kita biasanya memesan kopi secara bersamaan. Meskipun kopi yang kita pesan berbeda, tak jarang pelayanan mengantarkan pesanan bersamaan. Nah, pada kasus inilah pelayan menggunakan teknik Promise.all().
 
-Untuk memastikan rangkaian promise berjalan dengan sesuai, kita perlu mengembalikan (return) promise selanjutnya. Contohnya adalah seperti ini:
+Method Promise.all() dapat menerima banyak promise dalam bentuk array pada parameternya. Kemudian method tersebut akan mengembalikan nilai seluruh hasil dari promise dalam bentuk array.
+*/
+
+/*
+Keduanya dapat berjalan bersamaan. Kita akan memanfaatkan Promise.all() untuk menjalankan kedua fungsi di atas sebelum fungsi brewCoffee(). Ubah kode fungsi makeEspresso() menjadi seperti ini:
 */
 
 const state = {
@@ -41,6 +45,25 @@ const checkStock = () => {
   });
 };
 
+// Dua Fungsi Tambahan (boilWater & grindCoffeeBeans).
+const boilWater = () => {
+  return new Promise((resolve, reject) => {
+    console.log("Memanaskan air...");
+    setTimeout(() => {
+      resolve("Air panas sudah siap!");
+    }, 2000);
+  })
+}
+
+const grindCoffeeBeans = () => {
+  return new Promise((resolve, reject) => {
+    console.log("Menggiling biji kopi...");
+    setTimeout(() => {
+      resolve("Kopi sudah siap!");
+    }, 1000);
+  })
+}
+
 const brewCoffee = () => {
   console.log("Membuatkan kopi Anda...")
   return new Promise((resolve, reject) => {
@@ -55,6 +78,11 @@ function makeEspresso() {
     .then((value) => {
       console.log(value);
       return checkStock();
+    })
+    .then(value => {
+      console.log(value);
+      const promises = [boilWater(), grindCoffeeBeans()];
+      return Promise.all(promises);
     })
     .then((value) => {
       console.log(value)
@@ -71,3 +99,11 @@ function makeEspresso() {
 }
 
 makeEspresso();
+
+
+/**
+ *
+ Ketika kode di atas dieksekusi, kita perlu menunggu dua (2) detik untuk proses boilWater dan grindCoffeeBeans (durasi terlama dari promise yang dijalankan dari Promise.all()). Ini menunjukkan bahwa semua promise di dalam Promise.all() berjalan bersamaan dan menunggu sampai semua proses di dalamnya selesai dijalankan.
+
+Yang perlu kita perhatikan, urutan nilai yang dihasilkan oleh method ini sesuai dengan promise yang kita tentukan pada parameternya.
+ */
