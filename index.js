@@ -1,25 +1,42 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - Assignment Operator
-Pada dasarnya operator ini adalah tanda sama dengan (=), di mana tanda ini digunakan untuk menginisialisasi nilai pada variabel. Tempatkan variabel yang ingin diberi nilai di sebelah kiri, sementara nilainya di sebelah kanan. Di antara keduanya terdapat operator assignment.
-
-x = y;
-Expression di atas berarti kita menginisialisasikan nilai y pada variabel x, sehingga nilai x sekarang memiliki nilai yang sama dengan y.
-
-Ada beberapa assignment operator tambahan lain dalam menginisialisasikan nilai pada variabel. Kita bisa menyebutnya sebagai shortcut dalam menentukan nilai. Contohnya:
+/* - Comparison Operator
+Terdapat serangkaian karakter khusus yang disebut dengan operator pembanding/komparasi yang dapat mengevaluasi dan membandingkan dua nilai. Berikut daftar operator dan fungsinya:
+Operator:      Fungsi:
+  ==         Membandingkan kedua nilai apakah sama. (tidak identik).
+  !=         Membandingkan kedua nilai apakah tidak sama. (tidak identik).
+  ===        Membandingkan kedua nilai apakah identik.
+  !==        Membandingkan kedua nilai apakah tidak identik.
+  >          Membandingkan dua nilai apakah nilai pertama lebih dari nilai kedua.
+  >=         Membandingkan dua nilai apakah nilai pertama lebih atau sama dengan nilai kedua.
+  <          Membandingkan dua nilai apakah nilai pertama kurang dari nilai kedua.
+  <=         Membandingkan dua nilai apakah nilai pertama kurang atau sama dengan nilai kedua.
 */
 
-let x = 10;
-let y = 5
+let a = 10;
+let b = 12;
 
-x += y;
-
-console.log(x);
+console.log(a < b);
+console.log(a > b);
 
 /* output
-15
+true
+false
 */
 
-/*
-Pada contoh kode di atas, terdapat expression x += y; Apa artinya? Assignment operator tersebut digunakan sebagai shortcut dari x = x + y.
+/*Perbedaan antara “Sama” dan “Identik”.
+Dalam operator komparasi di JavaScript, hal yang menjadi sedikit “tricky” adalah membedakan antara “sama” (==) dan “identik” (===).
+
+Kita sudah mengetahui bahwa setiap nilai pasti memiliki tipe data baik itu number, string atau boolean. Contohnya sebuah string “10” dan number 10 merupakan hal yang serupa, tetapi keduanya tidak benar-benar sama.
+*/
+
+const aString = '10';
+const aNumber = 10
+
+console.log(aString == aNumber) // true, karena nilainya sama-sama 10
+console.log(aString === aNumber) // false, karena walaupun nilainya sama, tetapi tipe datanya berbeda
+
+/* output
+true
+false
 */
