@@ -1,30 +1,65 @@
 // # JAVASCRIPT FUNDAMENTALS
 
 /* - Object-Oriented Programming (OOP)
-Introduction to OOP
-Object Oriented Programming (OOP) adalah salah satu paradigma dalam dunia pemrograman komputer. Ia adalah pendekatan berbasiskan objek, di mana suatu objek terdiri dari kumpulan atribut dan method di dalamnya. Di dalam JavaScript, atribut adalah variable, yang digunakan untuk menyimpan nilai. Sementara method adalah fungsi, yang digunakan untuk menjalankan suatu proses
+Class adalah hal yang sangat penting dalam pemrograman berorientasi objek. Hal itu karena class menyediakan informasi tentang suatu object. Jadi dapat dikatakan object adalah instance dari sebuah class. Class sendiri dalam paradigma OOP secara teknis merupakan sebuah blueprint dalam mendefinisikan karakteristik dari sebuah objek. Sebagai contoh, misalkan terdapat blueprint untuk mendefinisikan objek Mail. Yang mana sms dan postman adalah object dari class Mail.
 
-Sebelumnya kita sudah mengenal dan mempelajari object. Di mana object dapat merepresentasikan sebuah layer data. Jika string dianalogikan sebagai kata (kumpulan karakter), number sebagai angka, dan boolean sebagai pernyataan benar atau salah; object dianalogikan sebagai sebuah benda yang lebih kompleks. OOP-pun sama, namun lebih kompleks lagi karena di dalam paradigma OOP terdapat 4 pilar utama, yaitu :
-  - encapsulation, 
-  - abstraction,
-  - inheritance, dan
-  - polymorphism.
+  Nama Class:	               Mail:
+  Karakteristik	            pengirim, penerima, isi pesan
+  Kapabilitas/aksi	        kirim pesan, terima pesan
 
-Sebagai contoh, kita memiliki sebuah data object bernama mail seperti contoh di bawah ini.
+Penulisan kelas di JavaScript sendiri bisa menggunakan sintaks class ataupun fungsi.
  */
 
+// Cara 1
+class YourClassName { }
+class YourAnotherClassName {
+  constructor(property1, property2) { }
+}
 
-const mail = {
-  from: "pengirim@dicoding.com",
-  sendMessage: function (msg, to) {
-    console.log(`you send: ${msg} to ${to} from ${this.from}`);
-  }
+
+// Cara 2
+function YourClassName() { }
+function YourAnotherClassName(property1, property2) { }
+
+
+// pemanggilannya
+const nameOfObject = YourClassName();
+const nameOfObject2 = new YourAnotherClassName('value of property', 123);
+
+
+/*
+Sebagai contoh, kita akan membuat blueprint untuk Mail, yang mana memiliki attribute from dan method sendMessage.
+*/
+// Function.
+function Mail() {
+  this.from = 'pengirim@dicoding.com';
+  this.sendMessage = function (msg, to) {
+    console.log('you send:', msg, 'to', to, 'from', this.from);
+  };
 };
 
-console.log(mail.from);
-mail.sendMessage('apakabar', 'penerima@dicoding.com');
+const mail1 = new Mail();
+mail1.sendMessage('hallo', 'penerima@dicoding.com');
 
 /**
 output:
-you send: apakabar to penerima@dicoding.com from pengirim@dicoding.com
+you send: hallo to penerima@dicoding.com from pengirim@dicoding.com
 **/
+
+// Class
+class Mail {
+  from = 'pengirim@dicoding.com';
+  sendMessage = function (msg, to) {
+    console.log('you send:', msg, 'to', to, 'from', this.from);
+  };
+}
+
+const mail1 = new Mail();
+mail1.sendMessage('hallo', 'penerima@dicoding.com');
+
+/**
+output:
+you send: hallo to penerima@dicoding.com from pengirim@dicoding.com
+**/
+
+// Kedua cara di atas adalah contoh penulisan dan instansiasi object dari sebuah Class.
