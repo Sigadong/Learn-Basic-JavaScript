@@ -1,59 +1,43 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* Kuis Coding: Map */
+/* - Arrow Function.
+ES6 memperkenalkan fungsi baru yang dinamakan arrow function expression atau lebih dikenal sebagai arrow function. Arrow function mirip seperti regular function secara perilaku, tetapi berbeda dalam penulisannya. Sesuai namanya, fungsi didefinisikan menggunakan tanda panah atau fat arrow ( => ). Tentunya penulisan arrow function ini akan lebih singkat.
 
-/** Declaring Function.
-
- Parameter & Argument.
-
-Di dalam fungsi kita akan banyak bertemu istilah parameter & argument. Penggunaan istilah ini sering kali tertukar, bahkan di kalangan developer.
-
-Perbedaan mendasar antara keduanya antara lain:
-Parameter merupakan variabel yang didefinisikan sebagai inputan dari sebuah fungsi. Contoh:
-    function multiply(a, b) {
-        return a * b;
-    }
-
-Argument merupakan nilai atau expression yang dimasukkan ke dalam fungsi. Contohnya:
-    multiply(3, 4);
+Selain perbedaan sintaksis, terdapat perbedaan perilaku antara arrow function dan regular function. Regular function dapat berupa function declaration dan function expression. Namun, arrow function hanya berupa expression function saja. Itu sebabnya arrow function memiliki nama lengkap “arrow function expression”.
 */
 
-function greeting(name, language) {
-  if (language === "English") {
-    return `Good Morning ${name}!`
-  } else if (language === "French") {
-    return `Bonjour ${name}!`;
-  } else {
-    return `Selamat Pagi ${name}!`;
-  }
+// >>> REGULAR FUNCTION <<<
+// function declaration
+function sayHello(greet) {
+  console.log(`${greet}!`);
 }
 
-let greetingMessage = greeting("Harry", "French");
-console.log(greetingMessage);
-
-/* output
-Bonjour Harry!
-*/
-
-
-
-/*
-Expression Function
-Cara lain untuk membuat sebuah fungsi pada JavaScript adalah expression function. Ingat kembali bahwa expression adalah kode atau instruksi yang mengembalikan nilai, sehingga expression function bisa disimpan dalam sebuah variabel.
-
-Pada expression function umumnya kita tidak perlu menuliskan nama fungsinya. Fungsi yang tidak bernama juga dikenal dengan anonymous function. Berikut ini merupakan contoh penulisan expression function:
-*/
-const greeting = function (name, language) {
-  if (language === "English") {
-    return "Good Morning " + name + "!";
-  } else if (language === "French") {
-    return "Bonjour " + name + "!";
-  } else {
-    return "Selamat Pagi " + name + "!";
-  }
+// function expression
+const sayName = function (name) {
+  console.log(`Nama saya ${name}`)
 }
 
-console.log(greeting('Ron', 'English'));
+
+
+//  # >>> ARROW FUNCTION <<<
+// function expression
+const sayHello = (greet) => {
+  console.log(`${greet}!`)
+}
+
+const sayName = (name) => {
+  console.log(`Nama saya ${name}`)
+}
+
+
+// Satu hal yang menarik dari arrow function, ketika body dari function hanya terdiri dari satu baris, kita bisa menghapus tanda kurung kurawal.
+const sayName = name => console.log(`Nama saya ${name}`);
+sayName("Leia");
+
+const multiply = (a, b) => a * b;
+console.log(multiply(3, 4));
+
 /* output
-Good Morning Ron!
-*/
+Nama saya Leia
+12
+ */
