@@ -1,7 +1,6 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* Kuis Coding: Object
-*/
+/* Kuis Coding: Object*/
 
 /**
  * TODO
