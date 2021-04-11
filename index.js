@@ -1,26 +1,30 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - Truthy & Falsy.
-Di dalam if statement kita perlu memasukkan expression yang akan dievaluasi. Umumnya, expression tersebut mengembalikan nilai boolean untuk menentukan kondisi true atau false. Lalu bagaimana jika kita menuliskan expression yang tidak mengembalikan nilai boolean? Jawabannya bisa.
+/* - Switch Case Statement.
+Tanda kurung setelah keyword switch berisi variabel atau expression yang akan dievaluasi. Kemudian untuk setiap kondisi yang mungkin terjadi, kita masukkan keyword case diikuti dengan nilai yang valid. Jika kondisi pada case sama dengan variabel pada switch, maka blok kode setelah titik dua (:) akan dijalankan. Keyword break digunakan untuk keluar dari proses switch. Terdapat satu case bernama default yang memiliki fungsi yang sama dengan keyword else pada control flow if-else. Jika tidak ada nilai yang sama dengan variabel pada switch, maka blok kode ini akan dijalankan.
 
-Setiap nilai pada JavaScript pada dasarnya juga mewarisi sifat boolean. Nilai ini dikenal dengan truthy atau falsy. Nilai truthy berarti nilai yang ketika dievaluasi akan menghasilkan nilai true, begitu pula falsy bernilai false. Jadi manakah yang termasuk truthy dan falsy? Selain nilai boolean false, tipe data atau nilai yang dianggap falsy, antara lain:
-  - Number -> 0
-  - BigInt -> 0n
-  - String kosong seperti “” atau ‘’
-  - null
-  - undefined
-  - NaN, atau Not a Number
-
-Selain contoh di atas maka nilainya adalah truthy dan ketika dievaluasi ke dalam if statement akan bernilai true. Berikut ini contohnya dalam kode:
+Berikut ini adalah contoh kode dari materi if-else yang dikonversi menjadi statement switch:
 */
 
-let name = "";
-if (name) {
-  console.log(`Halo, ${name}`);
-} else {
-  console.log("Nama masih kosong");
+let language = "French";
+let greeting = null;
+
+switch (language) {
+  case "English":
+    greeting = "Good Morning!";
+    break;
+  case "French":
+    greeting = "Bonjour!";
+    break;
+  case "Japanese":
+    greeting = "Ohayou Gozaimasu!";
+    break;
+  default:
+    greeting = "Selamat Pagi!";
 }
 
-/* output:
-Nama masih kosong
- */
+console.log(greeting);
+
+/* output
+Bonjour!
+*/
