@@ -1,46 +1,45 @@
 // # Object-Oriented Programming (OOP)
 
 /* # 4 Pilar OOP
-  - Inheritance.
-Beberapa objek bisa memiliki beberapa karakteristik atau perilaku yang sama, tetapi mereka bukanlah objek yang sama. Di sinilah inheritance atau pewarisan berperan. SMS dan jenis pesan lainnya memiliki karakteristik umum yang dimiliki juga oleh jenis pesan lainnya, seperti memiliki konten pesan, alamat/nomor pengirim, alamat/nomor penerima, dsb. Maka dari itu Email sebagai objek turunan (subclass) mewarisi semua sifat dan perilaku dari objek induknya (superclass) Mail. Begitu juga dengan objek Whatsapp juga mewarisi sifat dan perilaku yang sama, namun whatsapp bisa membuat grup, mengirim broadcast message sedangkan Email tidak (*misalkan).
-
-Dari contoh di atas, misalkan kita ingin membuat 2 (dua) child class yaitu WhatsApp dan Email. Maka dalam JavaScript cara menuliskan pewarisan terdapat 2 cara, yaitu sebagai berikut:
+  - Overriding Method.
+Overriding adalah teknik untuk kita melakukan perombakan (baik total ataupun tidak) pada sebuah method ataupun constructor yang dimiliki oleh parent class sehingga dapat disesuaikan dengan behavior di child class.
  */
-// cara 1: menggunakan keyword `extends` jika menggunakan statement `class`
-class ChildClassName extends ParentClassName { }
 
-// cara 2: menggunakan `prototype` jika menggunakan statement `function` / `class`
-ChildClassName.prototype = new ParentClassName()
-
-
-// Misalkan kita akan membuat sebuah child class bernama WhatsApp yang mewarisi kelas Mail. Maka contoh kodenya adalah sebagai berikut:
-class Mail {
-  _contacts = [];
-  constructor(author) {
-    this.from = author;
-  };
-  sendMessage = function (msg, to) {
-    console.log('you send:', msg, 'to', to, 'from', this.from);
-    this._contacts.push(to);
-  };
-  showAllContacts() {
-    return this._contacts;
-  }
-}
-
+/*
+Overriding Constructor
+Sebelumnya kita telah mempelajari tentang constructor dan juga pewarisan. Pada contoh kasus di inheritance atau pewarisan, kita menemukan kasus seperti di bawah ini.
+*/
 class WhatsApp extends Mail {
   username = 'dicoding';
   isBussinessAccount = true;
-
-  myProfile = function () {
-    return `my name ${this.username}, is ${this.isBussinessAccount ? 'Business' : 'Personal'}`;
-  };
+    ....
 }
-
+//pemanggilan
 const wa1 = new WhatsApp(080111000222);
-console.log(wa1.myProfile());
-// my name dicoding, is Business
+
+/*
+Sekarang bagaimana jika kita menambahkan username dan isBussinessAccount ke dalam constructor? Jika kita membuat constructor baru kodenya akan seperti ini:
+*/
+class WhatsApp extends Mail {
+  constructor(username, isBussinessAccount, phone) {
+    this.from = phone;
+    this.username = username;
+    this.isBussinessAccount = true;
+  }
+}
+const wa1 = new WhatsApp('dicoding', true, 089989090898);
+/** 
+ Error:
+ Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+ **/
 
 
-// Kita juga dapat mengakses attribute maupun method dari parent class yang Accessible. Misalkan:
-wa1.sendMessage('halo', 089000999888);
+/** 
+ Akan terjadi error tersebut dikarenakan constructor pada kelas parent gagal dieksekusi, meskipun kita telah menggunakan operator this.nameOfProperty. Solusinya kita menggunakan operator super() untuk mengeksekusi method parent-nya. Sehingga constructor pada kelas WhatsApp menjadi seperti ini.
+ **/
+
+constructor(username, isBussinessAccount, phone) {
+  super(phone);
+  this.username = username;
+  this.isBussinessAccount = true;
+}
