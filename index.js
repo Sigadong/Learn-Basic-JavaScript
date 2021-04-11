@@ -1,43 +1,46 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - Arrow Function.
-ES6 memperkenalkan fungsi baru yang dinamakan arrow function expression atau lebih dikenal sebagai arrow function. Arrow function mirip seperti regular function secara perilaku, tetapi berbeda dalam penulisannya. Sesuai namanya, fungsi didefinisikan menggunakan tanda panah atau fat arrow ( => ). Tentunya penulisan arrow function ini akan lebih singkat.
+/* - Variable Scope
+Sejauh ini kita sudah mengenal function. Setelah kita memisahkan kode ke dalam blok atau fungsi terpisah, ada satu hal penting yang perlu kita tahu, yaitu variable scoping. Ada banyak keadaan di mana kita membutuhkan variabel untuk diakses di seluruh script yang kita buat. Tetapi ada juga keadaan di mana kita ingin variabel tersebut hanya dapat diakses pada cakupan fungsi dan fungsi turunannya saja.
 
-Selain perbedaan sintaksis, terdapat perbedaan perilaku antara arrow function dan regular function. Regular function dapat berupa function declaration dan function expression. Namun, arrow function hanya berupa expression function saja. Itu sebabnya arrow function memiliki nama lengkap “arrow function expression”.
+Variabel yang dapat diakses dari seluruh script disebut dengan “globally scoped”, sementara variabel yang hanya diakses hanya pada fungsi tertentu disebut dengan “locally scoped”.
+
+Variabel JavaScript menggunakan fungsi untuk mengelola cakupannya. Jika variabel didefinisikan di luar fungsi, maka variabel tersebut bersifat global. Jika variabel didefinisikan di dalam fungsi, maka variabel bersifat lokal dan cakupannya hanya pada fungsi tersebut beserta turunannya.
+
+Berikut ini merupakan contoh scoping dalam kode:
 */
 
-// >>> REGULAR FUNCTION <<<
-// function declaration
-function sayHello(greet) {
-  console.log(`${greet}!`);
+// global variable, dapat diakses pada parent() dan child()
+const a = 'a';
+
+function parent() {
+  // local variable, dapat diakses pada parent() dan child(), tetapi tidak dapat diakses di luar dari fungsi tersebut.
+  const b = 'b';
+
+  function child() {
+    // local variable, dapat diakses hanya pada fungsi child().
+    const c = 'c';
+  }
 }
 
-// function expression
-const sayName = function (name) {
-  console.log(`Nama saya ${name}`)
-}
-
-
-
-//  # >>> ARROW FUNCTION <<<
-// function expression
-const sayHello = (greet) => {
-  console.log(`${greet}!`)
-}
-
-const sayName = (name) => {
-  console.log(`Nama saya ${name}`)
-}
-
-
-// Satu hal yang menarik dari arrow function, ketika body dari function hanya terdiri dari satu baris, kita bisa menghapus tanda kurung kurawal.
-const sayName = name => console.log(`Nama saya ${name}`);
-sayName("Leia");
-
-const multiply = (a, b) => a * b;
-console.log(multiply(3, 4));
-
-/* output
-Nama saya Leia
-12
+/*
+Kita harus berhati-hati dalam mendefinisikan variabel di dalam fungsi. Pasalnya, kita bisa mendapatkan hasil yang tidak diperkirakan, contohnya seperti berikut:
  */
+
+function multiply(num) {
+  total = num * num;
+  return total;
+}
+
+let total = 9;
+let number = multiply(20);
+
+console.log(total)
+
+/*
+Mungkin kita berharap nilai total akan tetap 9, mengingat variabel total pada fungsi multiply seharusnya tidak akan berpengaruh untuk kode di luar dari fungsi tersebut. Hal ini bisa terjadi karena pada fungsi multiply() kita tidak menetapkan variabel total sebagai cakupan lokal. Kita tidak menggunakan keyword const atau let ketika mendeklarasikan variabel total pada fungsi multiply() sehingga variabel total menjadi global.
+
+Perlu kita perhatikan, jika kita lupa menuliskan keyword let, const, atau var pada script ketika membuat sebuah variabel, maka variabel tersebut akan menjadi global.
+
+Sebisa mungkin kita harus menghindari pembuatan variabel global, karena variabel global dapat diakses pada seluruh script yang kita tuliskan. Semakin banyak variabel global yang kita tuliskan, semakin tinggi kemungkinan tabrakan (collision) terjadi.
+*/
