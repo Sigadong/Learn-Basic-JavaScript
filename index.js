@@ -1,45 +1,43 @@
 // # Object-Oriented Programming (OOP)
 
-/* # 4 Pilar OOP
-  - Overriding Method.
-Overriding adalah teknik untuk kita melakukan perombakan (baik total ataupun tidak) pada sebuah method ataupun constructor yang dimiliki oleh parent class sehingga dapat disesuaikan dengan behavior di child class.
- */
-
-/*
-Overriding Constructor
-Sebelumnya kita telah mempelajari tentang constructor dan juga pewarisan. Pada contoh kasus di inheritance atau pewarisan, kita menemukan kasus seperti di bawah ini.
-*/
-class WhatsApp extends Mail {
-  username = 'dicoding';
-  isBussinessAccount = true;
-    ....
-}
-//pemanggilan
-const wa1 = new WhatsApp(080111000222);
-
-/*
-Sekarang bagaimana jika kita menambahkan username dan isBussinessAccount ke dalam constructor? Jika kita membuat constructor baru kodenya akan seperti ini:
+/* # Overriding Method
+  Hampir sama dengan overriding constructor, namun yang di-override di sini adalah method-method yang ada pada parent class. Pada dasarnya semua method yang ada pada kelas parent dapat diakses langsung di child kelasnya (as is).
+      super.methodName();
+Kadang kita tidak menggunakan sebuah method seutuhnya sama seperti parent kelasnya. namun dapat menambahkan perintah tertentu ataupun menguranginya. Berikut merupakan contoh override pada method sendMessage.
 */
 class WhatsApp extends Mail {
   constructor(username, isBussinessAccount, phone) {
-    this.from = phone;
+    super(phone);
     this.username = username;
     this.isBussinessAccount = true;
   }
+
+  // Overriding method => Melakukan Override Total
+  sendMessage = function (msg, to) {
+    console.log('Send by WA');
+  }
 }
-const wa1 = new WhatsApp('dicoding', true, 089989090898);
-/** 
- Error:
- Must call super constructor in derived class before accessing 'this' or returning from derived constructor
- **/
 
 
-/** 
- Akan terjadi error tersebut dikarenakan constructor pada kelas parent gagal dieksekusi, meskipun kita telah menggunakan operator this.nameOfProperty. Solusinya kita menggunakan operator super() untuk mengeksekusi method parent-nya. Sehingga constructor pada kelas WhatsApp menjadi seperti ini.
- **/
+// Dari contoh tersebut, ketika kita memanggil method sendMessage hanya akan mengeksekusi kode yang ada pada child class.
+const wa1 = new WhatsApp('di', true, 089000999888);
+wa1.sendMessage('halo', 089000999888);
+/**
+Output:
+Send by WA
+**/
 
-constructor(username, isBussinessAccount, phone) {
-  super(phone);
-  this.username = username;
-  this.isBussinessAccount = true;
+
+// Untuk tetap melakukan eksekusi kode pada parent class maka perlu menggunakan operator super.methodName().
+sendMessage = function (msg, to) {
+  super.sendMessage(msg, to);
+  console.log('Send by WA');
 }
+
+
+/*
+Catatan:
+super(...) digunakan untuk memanggil constructor parent, dan hanya dapat digunakan di constructor.
+
+super.methodName(...) digunakan untuk memanggil parent method.
+*/
