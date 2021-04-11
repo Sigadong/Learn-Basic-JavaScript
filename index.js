@@ -1,26 +1,17 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - Loop.
-Infinite loops
-Ketika menerapkan perulangan pada program, ada satu kondisi yang perlu kita hindari yaitu infinite loop. Infinite loop atau endless loop adalah kondisi di mana program kita stucked di dalam perulangan. Ia akan berjalan terus hingga menyebabkan crash pada aplikasi dan komputer kecuali ada intervensi secara eksternal, seperti mematikan aplikasi.
+/* - Kuis Coding: Variabel dan Tipe Data */
 
-Kode berikut ini adalah contoh di mana kondisi infinite loop dapat terjadi:
-*/
+/**
+ * TODO:
+ * Buatlah variabel firstName, lastName, age, isMarried dengan ketentuan:
+ *  - firstName: bertipe data string, dengan nilai nama depan Anda.
+ *  - lastName: bertipe data string, dengan nilai nama belakang Anda.
+ *  - age: bertipe data number, dengan nilai umur Anda.
+ *  - isMarried: bertipe data boolean, dengan bebas Anda tentukan.
+ */
 
-// While
-let i = 1;
-
-while (i <= 5) {
-  console.log(i);
-}
-
-// For
-for (let i = 1; i <= 5; i = 1) {
-  console.log(i);
-}
-
-/*
-Dapatkah Anda menemukan apa yang salah dari kode di atas sehingga terjadi infinite loop?
-
-Jawabannya adalah karena variabel i selalu bernilai 1. Alhasil, kondisi i <= 5 akan selalu bernilai true yang mengakibatkan aplikasi akan terus mencetak 1 ke konsol sehingga mengalami crash.
-*/
+// TODO
+const firstName = "Irwanto", lastName = "Siregar";
+let age = 24;
+let isMarried = false;
