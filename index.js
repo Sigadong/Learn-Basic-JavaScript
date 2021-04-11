@@ -1,28 +1,25 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - Symbol.
-Symbol adalah tipe data baru yang dikenalkan pada ES6. Tipe data Symbol digunakan untuk menunjukkan identifier yang unik. Ketika membuat Symbol, kita bisa memberikan deskripsi atau nama symbol seperti ini:
+/* - Assignment Operator
+Pada dasarnya operator ini adalah tanda sama dengan (=), di mana tanda ini digunakan untuk menginisialisasi nilai pada variabel. Tempatkan variabel yang ingin diberi nilai di sebelah kiri, sementara nilainya di sebelah kanan. Di antara keduanya terdapat operator assignment.
+
+x = y;
+Expression di atas berarti kita menginisialisasikan nilai y pada variabel x, sehingga nilai x sekarang memiliki nilai yang sama dengan y.
+
+Ada beberapa assignment operator tambahan lain dalam menginisialisasikan nilai pada variabel. Kita bisa menyebutnya sebagai shortcut dalam menentukan nilai. Contohnya:
 */
-const id = Symbol("id");
-console.log(id);
+
+let x = 10;
+let y = 5
+
+x += y;
+
+console.log(x);
 
 /* output
-Symbol(id)
+15
 */
-
-
-/* 
-Symbol disebut sebagai identifier yang unik karena meskipun kita membuat dua variabel symbol dengan nama atau deskripsi yang sama, kedua nilainya tetap dianggap berbeda. Contohnya lihat kode berikut:
-*/
-const id1 = Symbol("id");
-const id2 = Symbol("id");
-console.log(id1 == id2);
-
-/* output
-false
-*/
-
 
 /*
-Symbol ini umumnya digunakan sebagai nama property dari Object. Object sendiri merupakan tipe data kompleks untuk menyimpan berbagai struktur data.
+Pada contoh kode di atas, terdapat expression x += y; Apa artinya? Assignment operator tersebut digunakan sebagai shortcut dari x = x + y.
 */
