@@ -1,30 +1,27 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - Switch Case Statement.
-Tanda kurung setelah keyword switch berisi variabel atau expression yang akan dievaluasi. Kemudian untuk setiap kondisi yang mungkin terjadi, kita masukkan keyword case diikuti dengan nilai yang valid. Jika kondisi pada case sama dengan variabel pada switch, maka blok kode setelah titik dua (:) akan dijalankan. Keyword break digunakan untuk keluar dari proses switch. Terdapat satu case bernama default yang memiliki fungsi yang sama dengan keyword else pada control flow if-else. Jika tidak ada nilai yang sama dengan variabel pada switch, maka blok kode ini akan dijalankan.
+/* - Loop.
+For loop.
+Dari beberapa cara melakukan proses loop pada JavaScript, “for” merupakan salah satu cara yang banyak digunakan. Struktur dasar dari for tampak seperti berikut:
 
-Berikut ini adalah contoh kode dari materi if-else yang dikonversi menjadi statement switch:
+for(inisialisasi variabel; test kondisi; perubahan nilai variabel) {
+    // do something
+}
+Berikut ini contoh penerapannya secara nyata:
 */
 
-let language = "French";
-let greeting = null;
-
-switch (language) {
-  case "English":
-    greeting = "Good Morning!";
-    break;
-  case "French":
-    greeting = "Bonjour!";
-    break;
-  case "Japanese":
-    greeting = "Ohayou Gozaimasu!";
-    break;
-  default:
-    greeting = "Selamat Pagi!";
+for (let i = 0; i < 5; i++) {
+  console.log(i);
 }
 
-console.log(greeting);
-
 /* output
-Bonjour!
+0 1 2 3 4 */
+
+/*
+Lebih ringkas, bukan? Mungkin kode tersebut sulit dipahami, jadi mari kita bahas sedikit demi sedikit. Terdapat tiga bagian utama dalam sintaks for di atas:
+
+Pertama, variabel i sebagai index iterasi. Pada variabel ini kita menginisialisasi nilai awal dari perulangan.
+Kedua, operasi perbandingan. Pada bagian ini, JavaScript akan melakukan pengecekan kondisi apakah perulangan masih perlu dilakukan. Jika bernilai true, maka kode di dalam blok for akan dijalankan.
+Ketiga, increment/decrement. Di sini kita melakukan penambahan atau pengurangan variabel iterasi. Jadi, pada contoh di atas variabel i akan ditambah dengan 1 di setiap akhir perulangan. Perubahan nilai ini penting karena jika kita mengubah nilainya, proses perulangan dapat berjalan selamanya karena kondisi akan terus terpenuhi.
+JIka diartikan, maka kode di atas bisa dimaknai dengan “Jika i kurang dari 5, maka tampilkan nilai i.”
 */
