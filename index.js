@@ -1,133 +1,44 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* Destructuring Array.
-Destructuring array serupa dengan destructuring object. Object menggunakan tanda kurung kurawal { } sedangkan array menggunakan tanda kurung siku [ ]. Perbedaan lainnya adalah destructuring array bekerja berdasarkan posisi daripada penamaan propertinya. Berikut contoh dari destructuring array pada ES6:
+/* Map
+Map adalah tipe data yang menyimpan koleksi data dengan format key-value layaknya Object. Yang membedakan adalah Map memperbolehkan key dengan tipe data apa pun, dibandingkan Object yang hanya mengizinkan key bertipe String atau Symbol.
+
+Untuk mendefinisikan Map gunakan constructor seperti di bawah ini:
+    const myMap = new Map();
 */
+const myMap = new Map([
+  ['1', 'a String key'],
+  [1, 'a number key'],
+  [true, true]
+]);
 
-const favorites = ["Seafood", "Salad", "Nugget", "Soup"];
-const [firstFood, secondFood, thirdFood, fourthFood] = favorites;
-
-console.log(firstFood);
-console.log(secondFood);
-console.log(thirdFood);
-console.log(fourthFood);
-
-/* output:
-Seafood
-Salad
-Nugget
-Soup
-*/
-
-
-/* 
-Kita juga bisa memilih nilai pada index tertentu untuk destrukturisasi pada array. Contohnya, jika ingin mengambil nilai ketiga dari array, kita tidak perlu menyiapkan variabel lokal untuk menampung nilai array pertama, kedua, atau pun keempat. Kita bisa melakukannya dengan membiarkan index array yang tidak kita inginkan tetap kosong (tanpa menulis variabel lokal). Lebih lanjut, tanda koma (,) tetap diperlukan untuk menunjukkan posisi index-nya seperti ini:
-*/
-const favorites = ["Seafood", "Salad", "Nugget", "Soup"];
-const [, , thirdFood] = favorites;
-console.log(thirdFood);
-
-/* output:
-Nugget
-*/
-
-
-
-/* Destructuring Assignment
-Kita juga bisa melakukan destructuring assignment pada array. Namun, tidak seperti object, kita tidak perlu membungkusnya dengan tanda kurung. Contohnya seperti berikut:
-*/
-
-const favorites = ["Seafood", "Salad", "Nugget", "Soup"];
-
-let myFood = "Ice Cream";
-let herFood = "Noodles";
-
-[myFood, herFood] = favorites;
-
-console.log(myFood);
-console.log(herFood);
-
-/* output:
-Seafood
-Salad
-*/
-
-
-/*
-Array destructuring assignment sangat berguna ketika kita hendak menukar nilai antara dua variabel. Sebelum ES6, untuk melakukan hal ini kita menggunakan cara manual menggunakan algoritma sorting seperti ini:
-*/
-
-var a = 1;
-var b = 2;
-var temp;
-
-console.log("Sebelum swap");
-console.log("Nilai a: " + a);
-console.log("Nilai b: " + b);
-
-temp = a;
-a = b;
-b = temp;
-
-console.log("Setelah swap");
-console.log("Nilai a: " + a);
-console.log("Nilai b: " + b);
+console.log(myMap);
 
 /* output
-Sebelum swap
-Nilai a: 1
-Nilai b: 2
-Setelah swap
-Nilai a: 2
-Nilai b: 1
+Map(3) { '1' => 'a String key', 1 => 'a number key', true => true }
 */
 
 
+/* output
+Array pertama (luar) menyimpan masing-masing elemen atau pasangan key-value dari Map. Kemudian array di dalamnya memiliki dua elemen, di mana elemen pertama adalah key dan array keduanya merupakan value.
 
-/* 
-Untuk melakukan pertukaran nilai, kita membutuhkan variabel penengah. Pada contoh kode di atas menggunakan variabel temp. Variabel penengah dibutuhkan untuk menyimpan data sementara pada variabel yang akan ditukar. Hal ini menjadi kurang efektif karena kita harus membuat variabel baru yang sebenarnya hanya bersifat sementara.
-
-Dengan array destructuring assignment, kita bisa menukar nilai variabel dengan mudah tanpa membuat variabel tambahan.
+Ketika sudah membuat objek Map, kita bisa mendapatkan nilainya berdasarkan key tertentu dengan metode get(). Lalu, untuk menambahkan pasangan key-value baru gunakan metode set().
 */
-let a = 1;
-let b = 2;
+const capital = new Map([
+  ["Jakarta", "Indonesia"],
+  ["London", "England"],
+  ["Tokyo", "Japan"]
+]);
 
-console.log("Sebelum swap");
-console.log("Nilai a: " + a);
-console.log("Nilai b: " + b);
+console.log(capital.size);
+console.log(capital.get("London"));
+capital.set("New Delhi", "India");
+console.log(capital.size);
+console.log(capital.get("New Delhi"));
 
-[a, b] = [b, a]
-
-console.log("Setelah swap");
-console.log("Nilai a: " + a);
-console.log("Nilai b: " + b);
-
-
-/* 
-Ketika melakukan destructuring array, tetapi terdapat variabel yang posisinya tidak dapat terjangkau oleh array, maka variabel tersebut akan bernilai undefined. Contohnya:
-*/
-const favorites = ["Seafood"];
-const [myFood, herFood] = favorites
-
-console.log(myFood);
-console.log(herFood);
-
-/* output:
-Seafood
-undefined
-*/
-
-
-/* 
-Sama seperti object, pada destructuring array kita juga dapat memberikan nilai default pada variabel yang tidak dapat terjangkau oleh array, sehingga nilai pada variabel tidak akan menjadi undefined.
-*/
-const favorites = ["Seafood"];
-const [myFood, herFood = "Salad"] = favorites
-
-console.log(myFood);
-console.log(herFood);
-
-/* output:
-Seafood
-Salad
+/* output
+3
+England
+4
+India
 */
