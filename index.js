@@ -1,29 +1,26 @@
 // # JAVASCRIPT FUNDAMENTALS
 
 /* - Loop.
-While and do-while
+Infinite loops
+Ketika menerapkan perulangan pada program, ada satu kondisi yang perlu kita hindari yaitu infinite loop. Infinite loop atau endless loop adalah kondisi di mana program kita stucked di dalam perulangan. Ia akan berjalan terus hingga menyebabkan crash pada aplikasi dan komputer kecuali ada intervensi secara eksternal, seperti mematikan aplikasi.
+
+Kode berikut ini adalah contoh di mana kondisi infinite loop dapat terjadi:
 */
 
+// While
 let i = 1;
 
-while (i <= 100) {
+while (i <= 5) {
   console.log(i);
-  i++;
+}
+
+// For
+for (let i = 1; i <= 5; i = 1) {
+  console.log(i);
 }
 
 /*
-Bisa dilihat pada kode di atas bahwa looping dengan while tidak memiliki ketergantungan dengan variabel iterasi seperti pada for loop. Karena itu, meskipun while dapat melakukan perulangan yang sama dengan for, while lebih cocok digunakan pada kasus di mana kita tidak tahu pasti berapa banyak perulangan yang diperlukan.
+Dapatkah Anda menemukan apa yang salah dari kode di atas sehingga terjadi infinite loop?
 
-Bentuk lain dari while adalah perulangan do-while.
-*/
-
-let i = 1;
-
-do {
-  console.log(i);
-  i++;
-} while (i <= 100);
-
-/*
-Kondisi pada while akan dievaluasi sebelum blok kode di dalamnya dijalankan, sedangkan do-while akan mengevaluasi boolean expression setelah blok kodenya berjalan. Ini artinya kode di dalam do-while akan dijalankan setidaknya satu kali.
+Jawabannya adalah karena variabel i selalu bernilai 1. Alhasil, kondisi i <= 5 akan selalu bernilai true yang mengakibatkan aplikasi akan terus mencetak 1 ke konsol sehingga mengalami crash.
 */
