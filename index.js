@@ -1,98 +1,32 @@
 // # JAVASCRIPT FUNDAMENTALS
 
 /* Data Structure.
-  - Array
-Array merupakan tipe data yang dapat mengelompokkan lebih dari satu nilai dan menempatkannya dalam satu variabel. Contoh:
+  - Spread Operator.
+  Masih terkait dengan array, ES6 memiliki fitur menarik untuk membantu pengelolaan array menjadi lebih mudah, yaitu spread operator.
+
+Sesuai namanya “spread”, fitur ini digunakan untuk menyebarkan nilai array atau lebih tepatnya iterable object menjadi beberapa elemen. Spread operator dituliskan dengan tiga titik (...). Mari kita lihat contoh kode berikut:
 */
 
-const myArray = ["Coklat", 42.5, 22, true, "Programming"];
+const favorites = ["Seafood", "Salad", "Nugget", "Soup"];
 
-myArray.push('JavaScript');
-console.log(myArray);
-
-myArray.pop();
-console.log(myArray);
-
-myArray.shift();
-myArray.unshift("Apple");
-console.log(myArray);
-
-delete myArray[1]; //menghapus data dari array berdasarkan index
-console.log(myArray);
-/* output
-[ 'Apple', <1 empty item>, 22, true, 'Programming' ]
-*/
-
-myArray.splice(2, 1);   // Menhapus dari index 2 sebanyak 1 elemen
-console.log(myArray);
-
+console.log(...favorites);
+//Sama Seperti dibawah Ini.
+console.log(favorites[0], favorites[1], favorites[2], favorites[3]);
 
 /* output
-[ 'Coklat', 42.5, 22, true, 'Programming', 'JavaScript' ]
- */
-
-
-/*
-Selain dot operator, kita juga bisa mengakses properti dari object menggunakan bracket atau tanda kurung siku.
-            user[“home world”];
-Untuk mengakses key yang memiliki spasi atau karakter khusus lainnya maka kita perlu menggunakan bracket seperti di atas.
-*/
-const user = {
-  firstName: "Luke",
-  lastName: "Skywalker",
-  age: 19,
-  isJedi: true,
-  "home world": "Tattooine"
-};
-console.log(`Halo, nama saya ${user.firstName} ${user.lastName}`);
-console.log(`Umur saya ${user.age} tahun`);
-console.log(`Saya berasal dari ${user["home world"]}`);
-/* output
-Halo, nama saya Luke Skywalker
-Umur saya 19 tahun
-Saya berasal dari Tattooine
+Seafood Salad Nugget Soup
 */
 
 
-
-const spaceship = {
-  name: "Millenium Falcon",
-  manufacturer: "Corellian Engineering Corporation",
-  maxSpeed: 1200,
-  color: "Light gray"
-};
-
-spaceship.color = "Glossy red";
-spaceship["maxSpeed"] = 1300;
-spaceship.class = "Light freighter";
-
-console.log(spaceship);
-
-/* output
-{
-name: 'Millenium Falcon',
-manufacturer: 'Corellian Engineering Corporation',
-maxSpeed: 1300,
-color: 'Glossy red',
-class: 'Light freighter'
-}
+/* 
+Spread operator dapat digunakan untuk menggabungkan dua buah array ke dalam array baru. 
 */
+const favorites = ["Seafood", "Salad", "Nugget", "Soup"];
+const others = ["Cake", "Pie", "Donut"];
 
-
-
-const spaceship = {
-  name: "Millenium Falcon",
-  manufacturer: "Corellian Engineering Corporation",
-  maxSpeed: 1200,
-  color: "Light gray"
-};
-
-spaceship.color = "Glossy red";
-spaceship["maxSpeed"] = 1300;
-
-delete spaceship.manufacturer;
-console.log(spaceship);
+const allFavorites = [...favorites, ...others];
+console.log(allFavorites);
 
 /* output
-{ name: 'Millenium Falcon', maxSpeed: 1300, color: 'Glossy red' }
+[ 'Seafood', 'Salad', 'Nugget', 'Soup', 'Cake', 'Pie', 'Donut' ]
 */
