@@ -1,44 +1,46 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* Map
-Map adalah tipe data yang menyimpan koleksi data dengan format key-value layaknya Object. Yang membedakan adalah Map memperbolehkan key dengan tipe data apa pun, dibandingkan Object yang hanya mengizinkan key bertipe String atau Symbol.
-
-Untuk mendefinisikan Map gunakan constructor seperti di bawah ini:
-    const myMap = new Map();
+/* Set
+Struktur data yang akan kita bahas berikutnya adalah Set. Set sederhananya merupakan kumpulan nilai (set of values). Hal yang membedakan Set dengan struktur data yang lain adalah data pada Set tidak berurutan dan juga tidak diindeks. Selain itu, data di dalam Set juga bersifat unik dan tidak ada duplikasi. Perhatikan contoh deklarasi Set di bawah ini:
 */
-const myMap = new Map([
-  ['1', 'a String key'],
-  [1, 'a number key'],
-  [true, true]
-]);
 
-console.log(myMap);
-
+const numberSet = new Set([1, 4, 6, 4, 1]);
+console.log(numberSet);
 /* output
-Map(3) { '1' => 'a String key', 1 => 'a number key', true => true }
+Set(3) { 1, 4, 6 }
 */
 
 
-/* output
-Array pertama (luar) menyimpan masing-masing elemen atau pasangan key-value dari Map. Kemudian array di dalamnya memiliki dua elemen, di mana elemen pertama adalah key dan array keduanya merupakan value.
+/* 
+Pada kode di atas terdapat beberapa angka yang duplikat, yaitu angka 1 dan 4. Secara otomatis Set akan membuang angka yang sama, sehingga nilai yang tersimpan adalah {1, 4, 6}.
 
-Ketika sudah membuat objek Map, kita bisa mendapatkan nilainya berdasarkan key tertentu dengan metode get(). Lalu, untuk menambahkan pasangan key-value baru gunakan metode set().
+Untuk menambahkan data ke dalam Set kita bisa memanfaatkan fungsi add().
 */
-const capital = new Map([
-  ["Jakarta", "Indonesia"],
-  ["London", "England"],
-  ["Tokyo", "Japan"]
-]);
+const numberSet = new Set([1, 4, 6, 4, 1]);
+numberSet.add(5);
+numberSet.add(10);
+numberSet.add(6);
 
-console.log(capital.size);
-console.log(capital.get("London"));
-capital.set("New Delhi", "India");
-console.log(capital.size);
-console.log(capital.get("New Delhi"));
-
+console.log(numberSet);
 /* output
-3
-England
-4
-India
+Set(5) { 1, 4, 6, 5, 10 }
+*/
+
+
+/* 
+Fungsi add() hanya menerima satu argumen. Jika Anda memasukkan array, maka array tersebut akan dianggap sebagai satu elemen sendiri. Nilai yang duplikat akan diabaikan.
+*/
+const numberSet = new Set([1, 4, 6, 4, 1]);
+numberSet.add(5);
+numberSet.add(10);
+numberSet.add(6);
+
+numberSet.delete(4);
+console.log(numberSet);
+/* output
+Set(4) { 1, 6, 5, 10 }
+*/
+
+/*
+Ingat bahwa Set tidak memiliki urutan atau index, sehingga argumen yang dimasukkan ke dalam fungsi delete adalah nilai yang ingin dihapus, bukan index-nya.
 */
