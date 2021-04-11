@@ -1,43 +1,30 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - Kuis Coding: Function /**
+/* - Object-Oriented Programming (OOP)
+Introduction to OOP
+Object Oriented Programming (OOP) adalah salah satu paradigma dalam dunia pemrograman komputer. Ia adalah pendekatan berbasiskan objek, di mana suatu objek terdiri dari kumpulan atribut dan method di dalamnya. Di dalam JavaScript, atribut adalah variable, yang digunakan untuk menyimpan nilai. Sementara method adalah fungsi, yang digunakan untuk menjalankan suatu proses
 
- * TODO:
- * 1. Buatlah fungsi bernama minimal dengan ketentuan berikut:
- *    - Menerima dua buah argumen number, a dan b.
- *    - Mengembalikan nilai terkecil antara a atau b.
- *    - Bila nilai keduanya sama, maka kembalikan dengan nilai a
- *
- *    contoh:
- *    minimal(1, 4) // 1
- *    minimal(3, 2) // 2
- *    minimal(3, 3) // 3
- *
- * 2. Buatlah fungsi bernama power dengan ketentuan berikut:
- *    - Menerima dua buah argumen number, a dan b.
- *    - Mengembalikan nilai dari hasil perkalian a * a sebanyak b (fungsi kuadrat).
- *
- *    contoh:
- *    power(7, 3) // 343
- *    power(3, 3) // 27
- *    power(4, 0.5) // 2
+Sebelumnya kita sudah mengenal dan mempelajari object. Di mana object dapat merepresentasikan sebuah layer data. Jika string dianalogikan sebagai kata (kumpulan karakter), number sebagai angka, dan boolean sebagai pernyataan benar atau salah; object dianalogikan sebagai sebuah benda yang lebih kompleks. OOP-pun sama, namun lebih kompleks lagi karena di dalam paradigma OOP terdapat 4 pilar utama, yaitu :
+  - encapsulation, 
+  - abstraction,
+  - inheritance, dan
+  - polymorphism.
+
+Sebagai contoh, kita memiliki sebuah data object bernama mail seperti contoh di bawah ini.
  */
 
 
-// TODO
-const minimal = (a, b) => {
-  if (a < b) {
-    return a;
-  } else if (b < a) {
-    return b;
-  } else if (a === b) {
-    return a;
+const mail = {
+  from: "pengirim@dicoding.com",
+  sendMessage: function (msg, to) {
+    console.log(`you send: ${msg} to ${to} from ${this.from}`);
   }
-}
+};
 
-let power = (a, b) => {
-  return Math.pow(a, b);
-}
+console.log(mail.from);
+mail.sendMessage('apakabar', 'penerima@dicoding.com');
 
-console.log(minimal(3, 4));
-console.log(power(2, 3));
+/**
+output:
+you send: apakabar to penerima@dicoding.com from pengirim@dicoding.com
+**/
