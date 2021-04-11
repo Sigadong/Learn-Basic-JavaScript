@@ -1,36 +1,35 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - Logical Operator.
-Terdapat beberapa operator lain yang dapat kita gunakan untuk menetapkan logika yang lebih kompleks, yakni dengan logical operators. Dengan logical operator, kita dapat menggunakan kombinasi dari dua nilai boolean atau bahkan lebih dalam menetapkan logika.
-
-Pada JavaScript terdapat tiga buah karakter khusus yang berfungsi sebagai logical operator. Berikut macam-macam logical operator dan fungsinya:
-
-Operator:	  Deskripsi:
-  !         Operator tidak (not). Digunakan untuk membalikkan suatu kondisi.
-  &&	      Operator dan (and). Logika akan menghasilkan nilai true apabila semua kondisi terpenuhi (bernilai true).
-  ||	      Operator atau (or). Logika akan menghasilkan nilai true apabila ada salah satu kondisi terpenuhi (bernilai true).
+/* - If/Else Statement
+Setiap hari kita melakukan perhitungan dan perbandingan guna membuat keputusan, apa pun itu. Contohnya, apakah perlu mencuci kendaraan ketika cuaca sedang cerah? Apa saja transportasi online yang bisa dipesan ketika hujan untuk sampai di tempat tujuan?
 */
 
-let a = 10;
-let b = 12;
+let language = "French";
+let greeting = "Selamat Pagi"
 
-/* AND operator */
-console.log(a < 15 && b > 10); // (true && true) -> true
-console.log(a > 15 && b > 10); // (false && true) -> false
+if (language === "English") {
+  greeting = "Good Morning!";
+} else if (language === "French") {
+  greeting = "Bonjour!"
+} else if (language === "Japanese") {
+  greeting = "Ohayou Gozaimasu!"
+}
+console.log(greeting);
+/* output
+Bonjour!
+*/
 
-/* OR operator */
-console.log(a < 15 || b > 10); // (true || true) -> true
-console.log(a > 15 || b > 10); // (false || true) -> true
 
-/* NOT operator */
-console.log(!(a < 15)); // !(true) -> false
-console.log(!(a < 15 && b > 10)); // !(true && true) -> !(true) -> false
+
+// condition ? true expression : false expression
+const isMember = false;
+const discount = isMember ? 0.1 : 0;
+console.log(`Anda mendapatkan diskon sebesar ${discount * 100}%`)
 
 /* output
-true
-false
-true
-true
-false
-false
-*/
+Anda mendapatkan diskon sebesar 0%
+ */
+
+/*
+Ternary operator membutuhkan tiga operand. Sebelum tanda tanya (?) berisi kondisi yang ingin kita evaluasi. Kemudian diikuti dengan expression apabila nilai kondisinya benar sebelum tanda titik dua. Terakhir adalah expression yang dieksekusi ketika kondisinya salah. Karena merupakan conditional expression, maka operand kedua dan ketiga harus mengembalikan nilai
+ */
