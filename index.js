@@ -1,109 +1,133 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* Data Structure.
-  - Destructuring Object
-Penulisan sintaksis destructuring object pada ES6 menggunakan object literal ({ }) di sisi kiri dari operator assignment.
+/* Destructuring Array.
+Destructuring array serupa dengan destructuring object. Object menggunakan tanda kurung kurawal { } sedangkan array menggunakan tanda kurung siku [ ]. Perbedaan lainnya adalah destructuring array bekerja berdasarkan posisi daripada penamaan propertinya. Berikut contoh dari destructuring array pada ES6:
 */
-const profile = {
-  firstName: "John",
-  lastName: "Doe",
-  age: 18
-}
 
-const { firstName, lastName, age } = profile;
-console.log(firstName, lastName, age);
+const favorites = ["Seafood", "Salad", "Nugget", "Soup"];
+const [firstFood, secondFood, thirdFood, fourthFood] = favorites;
+
+console.log(firstFood);
+console.log(secondFood);
+console.log(thirdFood);
+console.log(fourthFood);
 
 /* output:
-John Doe 18
+Seafood
+Salad
+Nugget
+Soup
 */
+
+
+/* 
+Kita juga bisa memilih nilai pada index tertentu untuk destrukturisasi pada array. Contohnya, jika ingin mengambil nilai ketiga dari array, kita tidak perlu menyiapkan variabel lokal untuk menampung nilai array pertama, kedua, atau pun keempat. Kita bisa melakukannya dengan membiarkan index array yang tidak kita inginkan tetap kosong (tanpa menulis variabel lokal). Lebih lanjut, tanda koma (,) tetap diperlukan untuk menunjukkan posisi index-nya seperti ini:
+*/
+const favorites = ["Seafood", "Salad", "Nugget", "Soup"];
+const [, , thirdFood] = favorites;
+console.log(thirdFood);
+
+/* output:
+Nugget
+*/
+
 
 
 /* Destructuring Assignment
-Pada contoh sebelumnya, kita telah melakukan destructuring object pada deklarasi variabel. Namun, pada kasus tertentu mungkin kita perlu melakukannya pada variabel yang sudah dideklarasikan.
+Kita juga bisa melakukan destructuring assignment pada array. Namun, tidak seperti object, kita tidak perlu membungkusnya dengan tanda kurung. Contohnya seperti berikut:
 */
-const profile = {
-  firstName: "John",
-  lastName: "Doe",
-  age: 18
-}
 
-let firstName = "Dimas";
-let age = 20;
+const favorites = ["Seafood", "Salad", "Nugget", "Soup"];
 
-// menginisialisasi nilai baru melalui object destruction
-({ firstName, age } = profile);
+let myFood = "Ice Cream";
+let herFood = "Noodles";
 
-console.log(firstName);
-console.log(age);
+[myFood, herFood] = favorites;
+
+console.log(myFood);
+console.log(herFood);
 
 /* output:
-John
-18
+Seafood
+Salad
 */
 
 
 /*
-Default Values.
-Ketika kita mendestruksikan objek dan menetapkan variabel dengan nama yang bukan merupakan properti dari objek, maka nilai dari variabel tersebut menjadi undefined. Contohnya:
+Array destructuring assignment sangat berguna ketika kita hendak menukar nilai antara dua variabel. Sebelum ES6, untuk melakukan hal ini kita menggunakan cara manual menggunakan algoritma sorting seperti ini:
 */
-const profile = {
-  firstName: "John",
-  lastName: "Doe",
-  age: 18
-}
 
-const { firstName, age, isMale } = profile;
+var a = 1;
+var b = 2;
+var temp;
 
-console.log(firstName)
-console.log(age)
-console.log(isMale)
+console.log("Sebelum swap");
+console.log("Nilai a: " + a);
+console.log("Nilai b: " + b);
+
+temp = a;
+a = b;
+b = temp;
+
+console.log("Setelah swap");
+console.log("Nilai a: " + a);
+console.log("Nilai b: " + b);
+
+/* output
+Sebelum swap
+Nilai a: 1
+Nilai b: 2
+Setelah swap
+Nilai a: 2
+Nilai b: 1
+*/
+
+
+
+/* 
+Untuk melakukan pertukaran nilai, kita membutuhkan variabel penengah. Pada contoh kode di atas menggunakan variabel temp. Variabel penengah dibutuhkan untuk menyimpan data sementara pada variabel yang akan ditukar. Hal ini menjadi kurang efektif karena kita harus membuat variabel baru yang sebenarnya hanya bersifat sementara.
+
+Dengan array destructuring assignment, kita bisa menukar nilai variabel dengan mudah tanpa membuat variabel tambahan.
+*/
+let a = 1;
+let b = 2;
+
+console.log("Sebelum swap");
+console.log("Nilai a: " + a);
+console.log("Nilai b: " + b);
+
+[a, b] = [b, a]
+
+console.log("Setelah swap");
+console.log("Nilai a: " + a);
+console.log("Nilai b: " + b);
+
+
+/* 
+Ketika melakukan destructuring array, tetapi terdapat variabel yang posisinya tidak dapat terjangkau oleh array, maka variabel tersebut akan bernilai undefined. Contohnya:
+*/
+const favorites = ["Seafood"];
+const [myFood, herFood] = favorites
+
+console.log(myFood);
+console.log(herFood);
 
 /* output:
-John
-18
+Seafood
 undefined
 */
 
 
-/*
-Alternatifnya, kita bisa secara opsional mendefinisikan nilai default pada properti tertentu jika tidak ditemukan. Untuk melakukanya, tambahkan tanda assignment (=) setelah nama variabel dan tentukan nilai default-nya seperti ini:
+/* 
+Sama seperti object, pada destructuring array kita juga dapat memberikan nilai default pada variabel yang tidak dapat terjangkau oleh array, sehingga nilai pada variabel tidak akan menjadi undefined.
 */
-const profile = {
-  firstName: "John",
-  lastName: "Doe",
-  age: 18
-}
-const { firstName, age, isMale = false } = profile;
+const favorites = ["Seafood"];
+const [myFood, herFood = "Salad"] = favorites
 
-console.log(firstName)
-console.log(age)
-console.log(isMale)
+console.log(myFood);
+console.log(herFood);
 
 /* output:
-John
-18
-false
-*/
-
-
-/* Assigning to Different Local Variable Names
-Sampai saat ini kita tahu bahwa untuk melakukan destrukturisasi object pada variabel lokal, kita perlu menyeragamkan penamaan variabel lokal dengan properti object-nya. Namun, sebenarnya dalam proses destrukturisasi object kita bisa menggunakan penamaan variabel lokal yang berbeda. ES6 menyediakan sintaksis tambahan yang membuat kita dapat melakukan hal tersebut. Penulisannya mirip seperti ketika kita membuat properti beserta nilainya pada object.
-*/
-
-const profile = {
-  firstName: "John",
-  lastName: "Doe",
-  age: 18
-}
-
-const { firstName: localFirstName, lastName: localLastName, age: localAge } = profile;
-
-console.log(localFirstName);
-console.log(localLastName);
-console.log(localAge);
-
-/* output:
-John
-Doe
-18
+Seafood
+Salad
 */
