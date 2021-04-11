@@ -1,25 +1,29 @@
 // # JAVASCRIPT FUNDAMENTALS
 
 /* - Loop.
-For of loop
-Cara lain dalam melakukan looping adalah menggunakan for..of. For of mulai hadir pada ECMAScript 2015 (ES6). Cara ini jauh lebih sederhana dan modern dibanding for loop biasa. Sintaks dasar dari for of loop adalah seperti ini:
-
-for(arrayItem of myArray) {
-    // do something
-}
-
-Dengan for..of nilai tiap array akan diinisialisasi pada variabel baru yang kita tentukan pada tiap proses looping-nya. Jumlah proses looping-nya pun akan menyesuaikan dengan ukuran dari array. Sederhananya seperti kita melakukan perintah “Hei JavaScript! Lakukan perulangan pada myArray, akses tiap nilainya, dan simpan pada variabel arrayItem”. Pada proses looping kita gunakan variabel arrayItem untuk mengakses tiap nilai dari item myArray
+While and do-while
 */
 
-let myArray = ["Luke", "Han", "Chewbacca", "Leia"];
+let i = 1;
 
-for (const arrayItem of myArray) {
-  console.log(arrayItem)
+while (i <= 100) {
+  console.log(i);
+  i++;
 }
 
-/* output
-Luke
-Han
-Chewbacca
-Leia
+/*
+Bisa dilihat pada kode di atas bahwa looping dengan while tidak memiliki ketergantungan dengan variabel iterasi seperti pada for loop. Karena itu, meskipun while dapat melakukan perulangan yang sama dengan for, while lebih cocok digunakan pada kasus di mana kita tidak tahu pasti berapa banyak perulangan yang diperlukan.
+
+Bentuk lain dari while adalah perulangan do-while.
+*/
+
+let i = 1;
+
+do {
+  console.log(i);
+  i++;
+} while (i <= 100);
+
+/*
+Kondisi pada while akan dievaluasi sebelum blok kode di dalamnya dijalankan, sedangkan do-while akan mengevaluasi boolean expression setelah blok kodenya berjalan. Ini artinya kode di dalam do-while akan dijalankan setidaknya satu kali.
 */
