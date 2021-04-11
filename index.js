@@ -1,46 +1,67 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* Set
-Struktur data yang akan kita bahas berikutnya adalah Set. Set sederhananya merupakan kumpulan nilai (set of values). Hal yang membedakan Set dengan struktur data yang lain adalah data pada Set tidak berurutan dan juga tidak diindeks. Selain itu, data di dalam Set juga bersifat unik dan tidak ada duplikasi. Perhatikan contoh deklarasi Set di bawah ini:
+/* WeakMap and WeakSet.
+WeakMap merupakan varian dari Map yang mendukung garbage collection. Garbage collection adalah proses di mana interpreter JavaScript mengambil kembali memori yang tidak lagi “dapat dijangkau” dan tidak dapat digunakan oleh program. Garbage collection di JavaScript dilakukan secara otomatis dan bukan menjadi urusan dari developer.
+
+Yang dimaksud weak dalam WeakMap adalah referensi terhadap nilai yang disimpan. Apabila suatu nilai yang disimpan di WeakMap sudah tidak terjangkau atau tidak bisa lagi diakses, maka referensi ke memorinya akan dihapus.
+
+Berikut ini adalah beberapa hal yang membedakan antara Map dan WeakMap:
+
+  - Key dari WeakMap harus berupa object atau array. Nilai primitif tidak bisa digunakan sebagai key karena tidak mendukung garbage collection.
+  - WeakMap memiliki methodget(), set(), has(), dan delete(). Namun, WeakMap tidak termasuk kategori iterable sehingga tidak memiliki method keys(), values(), atau forEach().
+  - WeakMap juga tidak memiliki property size. Ini karena ukuran WeakMap dapat berubah karena proses garbage collection.
+
+  Mari kita lihat contoh kode dan perbedaan antara Map dan WeakMap.
 */
 
-const numberSet = new Set([1, 4, 6, 4, 1]);
-console.log(numberSet);
+let visitsCountMap = new Map(); // Menyimpan daftar user
+
+function countUser(user) {
+  let count = visitsCountMap.get(user) || 0;
+  visitsCountMap.set(user, count + 1);
+}
+
+let jonas = { name: "Jonas" };
+countUser(jonas);                // Menambahkan user "Jonas"
+
+jonas = null;                    // Data object "Jonas" dihapus
+
+console.log(visitsCountMap);
+
 /* output
-Set(3) { 1, 4, 6 }
+Map(1) { { name: 'Jonas' } => 1 }
 */
 
 
 /* 
-Pada kode di atas terdapat beberapa angka yang duplikat, yaitu angka 1 dan 4. Secara otomatis Set akan membuang angka yang sama, sehingga nilai yang tersimpan adalah {1, 4, 6}.
+Ketika reference objek jonas dihapus dengan mengubahnya menjadi null, seharusnya map tidak lagi menyimpan data user (garbage collected). Namun, kenyataannya data jonas masih tersedia di dalam Map. Artinya, data jonas masih tersimpan di dalam memori sampai kita benar-benar menghapusnya.
 
-Untuk menambahkan data ke dalam Set kita bisa memanfaatkan fungsi add().
+Berbeda jika kita menggunakan WeakMap seperti inI:
+
+let visitsCountMap = new WeakMap();
+Ketika nilai jonas sudah tidak bisa dijangkau, object jonas akan dihapus dari memori termasuk informasi yang disimpan di dalam WeakMap.
 */
-const numberSet = new Set([1, 4, 6, 4, 1]);
-numberSet.add(5);
-numberSet.add(10);
-numberSet.add(6);
 
-console.log(numberSet);
+let visitsCountMap = new WeakMap(); // Menyimpan daftar user
+
+function countUser(user) {
+  let count = visitsCountMap.get(user) || 0;
+  visitsCountMap.set(user, count + 1);
+}
+
+let jonas = { name: "Jonas" };
+countUser(jonas);                // Menambahkan user "Jonas"
+jonas = null;                    // Data object "Jonas" dihapus
+console.log(visitsCountMap);
+
 /* output
-Set(5) { 1, 4, 6, 5, 10 }
+WeakMap { <items unknown> }
 */
 
-
-/* 
-Fungsi add() hanya menerima satu argumen. Jika Anda memasukkan array, maka array tersebut akan dianggap sebagai satu elemen sendiri. Nilai yang duplikat akan diabaikan.
-*/
-const numberSet = new Set([1, 4, 6, 4, 1]);
-numberSet.add(5);
-numberSet.add(10);
-numberSet.add(6);
-
-numberSet.delete(4);
-console.log(numberSet);
-/* output
-Set(4) { 1, 6, 5, 10 }
-*/
 
 /*
-Ingat bahwa Set tidak memiliki urutan atau index, sehingga argumen yang dimasukkan ke dalam fungsi delete adalah nilai yang ingin dihapus, bukan index-nya.
+Seperti halnya WeakMap, WeakSet adalah versi weak reference dari Set. Perbedaan antara WeakSet dan Set antara lain:
+  - WeakSet tidak bisa menyimpan nilai primitif.
+  - WeakSet bukan iterable dan hanya memiliki method add(), has(), dan delete().
+  - WeakSet tidak memiliki properti size.
 */
