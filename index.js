@@ -1,23 +1,30 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* Kuis Coding: Array */
+/* Kuis Coding: Map */
 
 /**
  * TODO:
- * Buatlah sebuah variabel dengan nama evenNumber yang merupakan sebuah array dengan ketentuan:
- *   - Array tersebut menampung bilangan genap dari 1 hingga 100
- *
- * Catatan:
- *   - Agar lebih mudah, gunakanlah for loop dan logika if untuk mengisi bilangan genap pada array.
+ * 1. Buatlah variabel currency yang merupakan Map dengan kriteria:
+ *   - key "USD", value 14000
+ *   - key "JPY", value 131
+ *   - key "SGD", value 11000
+ *   - key "MYR", value 3500
+ * 2. Buatlah variabel priceInIDR yang bernilai dari hasil perkalian:
+ *     - priceInJPY dengan nilai currency JPY
  */
 
-// TODO
-let evenNumber = [];
-for (let i = 1; i <= 100; i++) {
-  if (i % 2 == 0) {
-    evenNumber.push(i);
-  }
-}
+const priceInJPY = 5000;
 
-console.log(evenNumber);
+// TODO
+const currency = new Map([
+  ["USD", 14000],
+  ["JPY", 131],
+  ["SGD", 11000],
+  ["MYR", 3500],
+]);
+
+const priceInIDR = priceInJPY * currency.get("JPY");
+
+console.log(priceInIDR);
+
 
