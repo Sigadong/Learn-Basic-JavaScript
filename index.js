@@ -2,29 +2,58 @@
 
 /* Kuis Coding: Map */
 
-/**
- * TODO:
- * 1. Buatlah variabel currency yang merupakan Map dengan kriteria:
- *   - key "USD", value 14000
- *   - key "JPY", value 131
- *   - key "SGD", value 11000
- *   - key "MYR", value 3500
- * 2. Buatlah variabel priceInIDR yang bernilai dari hasil perkalian:
- *     - priceInJPY dengan nilai currency JPY
- */
+/** Declaring Function.
 
-const priceInJPY = 5000;
+ Parameter & Argument.
 
-// TODO
-const currency = new Map([
-  ["USD", 14000],
-  ["JPY", 131],
-  ["SGD", 11000],
-  ["MYR", 3500],
-]);
+Di dalam fungsi kita akan banyak bertemu istilah parameter & argument. Penggunaan istilah ini sering kali tertukar, bahkan di kalangan developer.
 
-const priceInIDR = priceInJPY * currency.get("JPY");
+Perbedaan mendasar antara keduanya antara lain:
+Parameter merupakan variabel yang didefinisikan sebagai inputan dari sebuah fungsi. Contoh:
+    function multiply(a, b) {
+        return a * b;
+    }
 
-console.log(priceInIDR);
+Argument merupakan nilai atau expression yang dimasukkan ke dalam fungsi. Contohnya:
+    multiply(3, 4);
+*/
+
+function greeting(name, language) {
+  if (language === "English") {
+    return `Good Morning ${name}!`
+  } else if (language === "French") {
+    return `Bonjour ${name}!`;
+  } else {
+    return `Selamat Pagi ${name}!`;
+  }
+}
+
+let greetingMessage = greeting("Harry", "French");
+console.log(greetingMessage);
+
+/* output
+Bonjour Harry!
+*/
 
 
+
+/*
+Expression Function
+Cara lain untuk membuat sebuah fungsi pada JavaScript adalah expression function. Ingat kembali bahwa expression adalah kode atau instruksi yang mengembalikan nilai, sehingga expression function bisa disimpan dalam sebuah variabel.
+
+Pada expression function umumnya kita tidak perlu menuliskan nama fungsinya. Fungsi yang tidak bernama juga dikenal dengan anonymous function. Berikut ini merupakan contoh penulisan expression function:
+*/
+const greeting = function (name, language) {
+  if (language === "English") {
+    return "Good Morning " + name + "!";
+  } else if (language === "French") {
+    return "Bonjour " + name + "!";
+  } else {
+    return "Selamat Pagi " + name + "!";
+  }
+}
+
+console.log(greeting('Ron', 'English'));
+/* output
+Good Morning Ron!
+*/
