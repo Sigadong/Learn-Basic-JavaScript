@@ -1,98 +1,37 @@
 // # Object-Oriented Programming (OOP)
 
-/* # Object Composition
-  Object composition adalah prinsip komposisi dari sebuah alur bisnis tanpa perlu melakukan pewarisan dari parent-nya. Prinsip ini didasarkan di mana kita telah mendefinisikan kumpulan-kumpulan perilaku (method/function) sehingga ketika kita ingin membuat alur bisnis lain dengan beberapa perilaku (method) yang sama, kita dapat menggunakan yang sudah ada tanpa melakukan inheritance/pewarisan.
+/* # Built-in Class.
+  Dalam JavaScript sendiri terdapat built-in Object bawaan, misalkan Date, Object, Array, Math, dan String yang dapat digunakan untuk memanipulasi data-data terkait dengan array, perintah matematik, manipulasi karakter, dan manipulasi objek.
 
-  Pada dasarnya konsep yang harus dilakukan adalah:
+  Date merupakan core object bawaan dari bahasa pemrograman JavaScript yang digunakan untuk utilitas terkait tanggal dan waktu. Ini sangat membantu kita ketika dalam program yang kita buat terdapat penggunaaan dan manipulasi tanggal dan waktu.
+*/
+// #1 tanpa parameter, yang berarti `myDate` akan berisi tanggal dan waktu saat ini
+const myDate = new Date();
+
+// #2 parameter tanggal dalam bentuk string, misal  "January 01, 2021" 
+const myDate = new Date(dateString);
+
+// #3 parameter dalam bentuk number, misal 87400000
+const myDate = new Date(miliseconds);
+
+// #4 parameter tanggal dalam bentuk number (7 parameter), [hour,minute,second,millisecond] bersifat opsional
+const myDate = new Date(year, month, date, hour, minute, second, millisecond);
+
+
+
+/* Contoh Penggunaan Date.
+Berikut ini adalah kode misalkan kita ingin menghitung berapa umur kita dengan memanfaatkan object date.
 */
 
-//  1.Memisahkan fungsi-fungsi umum yang biasa digunakan.
-const yourGenericAction = params => ({
-  actionA: () => { /** do action A **/ },
-  actionB: () => { /** do action B **/ },
-});
+// parameter birthday dapat berupa miliseconds ataupun date string
+const myAge = birthday => {
+  const birtday = new Date(birthday);
+  const today = Date.now(); // today menghasilkan nilai miliseconds saat ini
 
-//  2.Membuat Class seperti biasa.
-const YourClassName = (paramA, paramB) => {
-}
+  const diff_ms = today - birtday.getTime(); // menghitung selisih nilai miliseconds hari ini dan tanggal lahir
+  const diffDate = new Date(diff_ms);
 
-//  3.Kita dapat menyimpan attribute yang kita punya ke dalam sebuah object, biasanya seorang engineer menggunakan konstanta dengan nama self atau state untuk menampung attribute.
-const YourClassName = (paramA, paramB) => {
-  const self = {
-    paramsA,
-    paramsB
-  };
-}
-
-//  4.Menambahkan perilaku (method/function) yang hanya ada pada kelas tersebut.
-const YourClassName = (paramA, paramB) => {
-  const self = {
-    paramsA,
-    paramsB
-  };
-
-  const yourSpecificActions = self => ({
-    specificActinA: { /** do action A **/ },
-  });
-}
-
-//  5.Membuat kumpulan attribute, generic method, dan spesific method menjadi satu objek.
-const YourClassName = (paramA, paramB) => {
-  const self = {
-    paramsA,
-    paramsB
-  };
-
-  const yourSpecificActions = self => ({
-    specificActinA: { /** do action A **/ },
-  });
-
-  return Object.assign(self, yourGenericAction(self), yourSpecificActions(self))
-}
-
-
-
-
-
-// Sebagai contoh, dari hirarki Mail yang sudah kita buat sebelumnya. kita akan merombak dan membuatnya dengan pendekatan Object composition :.
-
-// [1] list of abstractions
-const canSendMessage = self => ({
-  sendMessage: () => console.log('send message:', self.message)
-});
-
-const checkIsValidPhone = self => ({
-  isValid: () => console.log('valid phone', self.from)
-});
-
-// [2] crate object composition
-const personalEnterprise = (from, message, store) => {
-  // [3] attributes
-  const self = {
-    from,
-    message,
-    store
-  };
-  // [4] method
-  const personalEnterpriseBehaviors = self => ({
-    createCatalog: () => console.log('Catalog has created: ', self.store)
-  });
-
-  // [5] create object composition
-  return Object.assign(self, personalEnterpriseBehaviors(self), canSendMessage(self), checkIsValidPhone(self));
+  return diffDate.getFullYear() - 1970; // 1970 adalah representasi 0 dari miliseconds
 };
 
-const pe1 = personalEnterprise('pengirim@gmail.com', 'hei produk baru nih', 'Dicoding Store');
-pe1.createCatalog(); //Catalog has created:  Dicoding Store
-pe1.sendMessage(); //send message: hei produk baru nih
-
-/*
-Penjabaran kode di atas:
-  - Kita membuat sebuah abstraksi untuk method-method yang umum digunakan (di sini misalkan method mengirim pesan, dan validasi nomor hp).
-  - Kita membuat sebuah kelas baru dengan nama personalEnterprise, di mana seperti biasa kita dapat menggunakan parameter yang akan digunakan.
-  - Pada  object composition ini, penggunaan parameter biasa digunakan untuk mendaftarkan attribute-attribute dari kelas tersebut. Pada contoh di atas, kita mengumpulkan attribute tersebut pada konstanta bernama self atau state.
-  - Method, kita dapat juga menambahkan method/fungsi yang spesifik hanya ada pada kelas tersebut (kapabilitasnya hanya pada kelas tersebut / tidak umum).
-  - Proses pembuatan object dengan perintah Object.assign(attribute, method1, method2, methodN).
-
-Dari contoh kode di atas maka kita dapat membuat sebuah object dengan nama personalEnterprise tanpa harus melakukan pewarisan.
-*/
+myAge('2000-01-22'); // 21 tahun
