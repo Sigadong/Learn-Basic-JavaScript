@@ -1,47 +1,93 @@
 // # JAVASCRIPT FUNDAMENTALS
 
 
-/* - Variable Scope
-Sejauh ini kita sudah mengenal function. Setelah kita memisahkan kode ke dalam blok atau fungsi terpisah, ada satu hal penting yang perlu kita tahu, yaitu variable scoping. Ada banyak keadaan di mana kita membutuhkan variabel untuk diakses di seluruh script yang kita buat. Tetapi ada juga keadaan di mana kita ingin variabel tersebut hanya dapat diakses pada cakupan fungsi dan fungsi turunannya saja.
-
-Variabel yang dapat diakses dari seluruh script disebut dengan “globally scoped”, sementara variabel yang hanya diakses hanya pada fungsi tertentu disebut dengan “locally scoped”.
-
-Variabel JavaScript menggunakan fungsi untuk mengelola cakupannya. Jika variabel didefinisikan di luar fungsi, maka variabel tersebut bersifat global. Jika variabel didefinisikan di dalam fungsi, maka variabel bersifat lokal dan cakupannya hanya pada fungsi tersebut beserta turunannya.
-
-Berikut ini merupakan contoh scoping dalam kode:
+/* - Closure
+Suatu fungsi yang dapat mengakses variabel di dalam lexical scope-nya disebut dengan closure. Lexical scope berarti pada sebuah fungsi bersarang, fungsi yang berada di dalam memiliki akses ke variabel di lingkup induknya.
 */
 
-// global variable, dapat diakses pada parent() dan child()
-const a = 'a';
+function init() {
+  var name = 'Obi Wan';   // Variabel lokal di dalam scope fungsi init
 
-function parent() {
-  // local variable, dapat diakses pada parent() dan child(), tetapi tidak dapat diakses di luar dari fungsi tersebut.
-  const b = 'b';
-
-  function child() {
-    // local variable, dapat diakses hanya pada fungsi child().
-    const c = 'c';
+  function greet() {      // Inner function, merupakan contoh closure
+    console.log(`Halo, ${name}`);   // Memanggil variabel yang dideklarasikan di parent function
   }
+
+  greet();
 }
 
+init();
+
+
 /*
-Kita harus berhati-hati dalam mendefinisikan variabel di dalam fungsi. Pasalnya, kita bisa mendapatkan hasil yang tidak diperkirakan, contohnya seperti berikut:
+Fungsi init() memiliki variabel lokal name dan fungsi greet(). Fungsi greet() adalah inner function yang didefinisikan di dalam init() dan hanya bisa diakses dari dalam fungsi init(). Perhatikan bahwa fungsi greet() tidak memiliki variabel lokal. Namun, karena inner function memiliki akses ke variabel di parent function-nya, sehingga greet() dapat mengakses variabel name. Itulah yang dimaksud dengan lexical scope.
+
+Sekarang perhatikan contoh kode berikut:
  */
 
-function multiply(num) {
-  total = num * num;
-  return total;
+function init() {
+  var name = 'Obi Wan';
+
+  function greet() {
+    console.log(`Halo, ${name}`);
+  }
+
+  return greet;
 }
 
-let total = 9;
-let number = multiply(20);
+let myFunction = init();
+myFunction();
 
-console.log(total)
+/* output
+Halo, Obi Wan
+*/
 
 /*
-Mungkin kita berharap nilai total akan tetap 9, mengingat variabel total pada fungsi multiply seharusnya tidak akan berpengaruh untuk kode di luar dari fungsi tersebut. Hal ini bisa terjadi karena pada fungsi multiply() kita tidak menetapkan variabel total sebagai cakupan lokal. Kita tidak menggunakan keyword const atau let ketika mendeklarasikan variabel total pada fungsi multiply() sehingga variabel total menjadi global.
+Kode di atas akan menghasilkan output yang sama. Perbedaannya adalah fungsi greet() dikembalikan (return) dari outer function-nya sebelum dieksekusi. Karena variabel name berada dalam scope init(), maka umumnya variabel tersebut akan hilang atau dihapus ketika fungsinya selesai dijalankan. Namun, pada kasus di atas fungsi greet() yang diakses melalui fungsi MyFunction() masih memiliki referensi atau akses ke variabel name. Variabel pada mekanisme di atas telah tertutup (close covered), yang berarti variabel tersebut berada di dalam closure.
 
-Perlu kita perhatikan, jika kita lupa menuliskan keyword let, const, atau var pada script ketika membuat sebuah variabel, maka variabel tersebut akan menjadi global.
+Memang di awal cukup sulit untuk memahami closure. Jadi, mari kita lihat langsung untuk apa closure ini digunakan pada suatu program yang nyata.
 
-Sebisa mungkin kita harus menghindari pembuatan variabel global, karena variabel global dapat diakses pada seluruh script yang kita tuliskan. Semakin banyak variabel global yang kita tuliskan, semakin tinggi kemungkinan tabrakan (collision) terjadi.
+JavaScript tidak memiliki cara untuk mendeklarasikan suatu fungsi atau variabel menjadi private seperti bahasa Java. Sehingga sebuah fungsi atau variabel bisa diakses dari mana pun. Kenapa kita membutuhkan private method? Salah satunya adalah untuk membatasi akses ke fungsi atau variabel. Perhatikan contoh berikut:
+*/
+
+let counter = 0;
+
+let add = () => {
+  return ++counter;
+}
+
+console.log(add());
+console.log(add());
+counter = 23;
+console.log(add());
+
+/* output
+1
+2
+24
+ */
+
+
+/* 
+Nilai counter akan bertambah ketika kita memanggil fungsi add(). Namun, kita juga bisa mengubah nilai counter secara langsung dengan assignment operator. Pada contoh program yang lebih kompleks, sebaiknya hal ini dihindari karena perubahan langsung pada nilai counter bisa saja memunculkan bug.
+
+Closure memungkinkan kita membuat fungsi dan variabel seolah menjadi private. Seperti inilah contoh program counter yang dibuat dengan closure:
+ */
+
+let add = () => {
+  let counter = 0;
+  return () => {
+    return ++counter;
+  };
+}
+
+let addCounter = add();
+
+console.log(addCounter());
+console.log(addCounter());
+console.log(addCounter());
+
+/* output
+1
+2
+3
 */
