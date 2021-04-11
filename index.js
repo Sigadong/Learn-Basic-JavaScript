@@ -1,41 +1,41 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - BigInt
+/* - Strings
 
-Pada JavaScript, tipe data “Number” hanya mencakup nilai dari -(253 - 1) hingga (253 - 1). Untuk kebutuhan umum, sebenarnya nilai tersebut sudah sangat cukup. Namun, akan ada kebutuhan tertentu di mana kita membutuhkan cakupan nilai yang lebih besar, seperti untuk kriptografi atau menentukan waktu hingga presisi microsecond.
-
-Untuk nilai di luar Number, kita bisa menggunakan tipe BigInt. Untuk membedakan tipe BigInt dan Number, tambahkan karakter n di akhir angka. Contohnya adalah seperti kode di bawah ini. Bandingkan dengan yang bertipe Number.
+Tipe data selanjutnya adalah string yang merupakan sebuah teks. Untuk menetapkan nilai sebagai string pada variabel gunakan tanda petik satu (‘) atau petik dua (“) di antara teksnya. Contohnya:
 */
 
-const bigNumber = 1234567890123456789012345678901234567890n;
-const myInt = 1234567890123456789012345678901234567890;
+let greet = "Hello";
+console.log(typeof (greet))
 
-console.log(bigNumber);
-console.log(myInt);
-
-/* output
-1234567890123456789012345678901234567890n
-1.2345678901234568e+39
-*/
+/* output: string */
 
 
 /**
- Meskipun digunakan untuk menyimpan angka dengan nilai besar, namun BigInt tetap bisa digunakan untuk nilai yang lebih kecil.
-
-const bigIntButSmall = 7n;
-Kita juga bisa menggunakan BigInt untuk operasi aritmatika pada umumnya. Yang membedakan adalah pada operasi pembagian, hasilnya akan dibulatkan ke bawah dan tanpa mengandung nilai desimal. Contohnya adalah seperti ini:
+ Lalu bagaimana jika teks memiliki kedua tanda petik seperti ini?
  */
+const answer = '"I think it's awesome!" he answered confidently';
+console.log(answer);
 
-console.log(5n + 2n);
-console.log(5n - 2n);
-console.log(5n * 2n);
-console.log(5n / 2n);
-console.log(5n % 2n);
+/*
+Tentunya kode di atas akan menghasilkan eror. Solusinya, gunakan backslash(\) untuk mengurangi ambiguitas dalam tanda petik. Mekanisme ini juga dikenal dengan nama escape string. Sehingga kode di atas akan menjadi seperti berikut:
+*/
 
-/* output
-7n
-3n
-10n
-2n; Bukan 2.5n
-1n
+const answer = '"I think it\'s awesome!" he answered confidently';
+
+/*
+Backslash sebelum tanda petik akan memberitahukan interpreter bahwa itu hanyalah tanda petik dan tidak boleh ditafsirkan sebagai pembatas string. Selain tanda petik, backslash juga berguna untuk mengabaikan simbol lain yang menimbulkan ambigu di dalam string, contohnya seperti backslash itu sendiri.
+*/
+
+/*
+Selain concatenation, string pada JavaScript juga mendukung string interpolation. Sederhananya, kita bisa memasukkan variabel ke dalam sebuah string template. Contohnya adalah seperti berikut:
+*/
+
+const myName = "Luke";
+console.log(`Hello, my name is ${myName}.`);
+
+/* output: Hello, my name is Luke. */
+
+/*
+Perhatikan bahwa untuk mendefinisikan string template, Anda perlu menggunakan backticks (`), biasanya terletak di keyboard di sebelah kiri tombol 1). Di dalam string letakkan variabel yang ingin dimasukkan ke dalam placeholder ${myName}.
 */
