@@ -1,39 +1,41 @@
 // # JAVASCRIPT FUNDAMENTALS
 
-/* - Numbers
+/* - BigInt
 
-Jika angka tersebut merupakan sebuah bilangan desimal, maka kita bisa gunakan tanda titik pada pecahan bilangannya.
+Pada JavaScript, tipe data “Number” hanya mencakup nilai dari -(253 - 1) hingga (253 - 1). Untuk kebutuhan umum, sebenarnya nilai tersebut sudah sangat cukup. Namun, akan ada kebutuhan tertentu di mana kita membutuhkan cakupan nilai yang lebih besar, seperti untuk kriptografi atau menentukan waktu hingga presisi microsecond.
+
+Untuk nilai di luar Number, kita bisa menggunakan tipe BigInt. Untuk membedakan tipe BigInt dan Number, tambahkan karakter n di akhir angka. Contohnya adalah seperti kode di bawah ini. Bandingkan dengan yang bertipe Number.
 */
 
-let x = 10;
-console.log(typeof (x))
+const bigNumber = 1234567890123456789012345678901234567890n;
+const myInt = 1234567890123456789012345678901234567890;
 
-/* output: number */
+console.log(bigNumber);
+console.log(myInt);
 
-let y = 17.25;
-console.log(typeof (y))
-
-/* output: number */
+/* output
+1234567890123456789012345678901234567890n
+1.2345678901234568e+39
+*/
 
 
 /**
- Pada operator aritmatika juga terdapat operator increment (++) dan decrement (--). Operator increment dan decrement digunakan untuk menambahkan atau mengurangi nilai 1 pada nilai variabel yang ada sekarang.
+ Meskipun digunakan untuk menyimpan angka dengan nilai besar, namun BigInt tetap bisa digunakan untuk nilai yang lebih kecil.
 
-Operator ini dapat dituliskan sebelum atau sesudah variabel, tetapi hal tersebut bukan berarti sama. Berikut ketentuannya:
-* Jika dituliskan setelah variabel (x++), expression akan menghasilkan nilai variabel sebelum ditingkatkan nilainya.
-* Jika dituliskan sebelum variabel (++x), expression akan menghasilkan nilai variabel setelah ditingkatkan nilainya.
-
-Untuk lebih jelasnya, berikut adalah contoh kode penerapan operator tersebut, perhatikan hasil yang didapat.
+const bigIntButSmall = 7n;
+Kita juga bisa menggunakan BigInt untuk operasi aritmatika pada umumnya. Yang membedakan adalah pada operasi pembagian, hasilnya akan dibulatkan ke bawah dan tanpa mengandung nilai desimal. Contohnya adalah seperti ini:
  */
 
-/* Increment dan Decrement */
+console.log(5n + 2n);
+console.log(5n - 2n);
+console.log(5n * 2n);
+console.log(5n / 2n);
+console.log(5n % 2n);
 
-let postfix = 5;
-console.log(postfix++);
-/* output: 5 */
-console.log(postfix);
-/* output: 6 */
-
-let prefix = 5;
-console.log(++prefix);
-/* output: 6 */
+/* output
+7n
+3n
+10n
+2n; Bukan 2.5n
+1n
+*/
