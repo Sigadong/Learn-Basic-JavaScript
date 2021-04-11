@@ -1,25 +1,35 @@
 // # JAVASCRIPT FUNDAMENTALS
 
 /* Data Structure.
-  - Object
-  Sebuah tipe data yang sangat berguna dalam pengembangan aplikasi dengan JavaScript. Object mampu menyimpan nilai dari beragam tipe data dan membentuk data yang lebih kompleks.
-
-  Object berisi pasangan key dan value yang juga dikenal dengan property. Key berperan mirip seperti nama variabel yang menyimpan sebuah nilai. Sementara, value berisi nilai dengan tipe data apa pun termasuk objek lain
+  - Array
+Array merupakan tipe data yang dapat mengelompokkan lebih dari satu nilai dan menempatkannya dalam satu variabel. Contoh:
 */
 
-const user = {
-  firstName: "Luke",
-  lastName: "Skywalker",
-  age: 19,
-  isJedi: true,
-};
-console.log(`Halo, nama saya ${user.firstName} ${user.lastName}`);
-console.log(`Umur saya ${user.age} tahun`);
+const myArray = ["Coklat", 42.5, 22, true, "Programming"];
+
+myArray.push('JavaScript');
+console.log(myArray);
+
+myArray.pop();
+console.log(myArray);
+
+myArray.shift();
+myArray.unshift("Apple");
+console.log(myArray);
+
+delete myArray[1]; //menghapus data dari array berdasarkan index
+console.log(myArray);
+/* output
+[ 'Apple', <1 empty item>, 22, true, 'Programming' ]
+*/
+
+myArray.splice(2, 1);   // Menhapus dari index 2 sebanyak 1 elemen
+console.log(myArray);
+
 
 /* output
-Halo, nama saya Luke Skywalker
-Umur saya 19 tahun
-*/
+[ 'Coklat', 42.5, 22, true, 'Programming', 'JavaScript' ]
+ */
 
 
 /*
